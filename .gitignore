@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+frontend/.next/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Environment files
+.env
+.env.*
+!.env.example
+infrastructure/.env
+
+# Binaries and tools
+neon.exe
+*.exe
+
+# Uploaded media (store in cloud storage or mount in production)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
