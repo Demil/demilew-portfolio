@@ -8,6 +8,16 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str
 
+    @property
+    def sync_database_url(self) -> str:
+        """Ensure PostgreSQL connection strings explicitly specify the psycopg2 driver."""
+        url = self.DATABASE_URL
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+psycopg2://", 1)
+        elif url.startswith("postgresql://") and not url.startswith("postgresql+"):
+            url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
+        return url
+
     # Security
     SECRET_KEY: str = "change-me-in-production"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
