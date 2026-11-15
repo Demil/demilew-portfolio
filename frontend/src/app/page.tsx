@@ -9,6 +9,7 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import CvNotificationBanner from '@/components/CvNotificationBanner';
 import VisitorNavDock from '@/components/VisitorNavDock';
+import CvViewerModal from '@/components/CvViewerModal';
 import {
   getCvInfo,
   getEducation,
@@ -50,6 +51,7 @@ export default async function Home() {
       <Footer />
       <VisitorNavDock />
       <CvNotificationBanner cvInfo={cvInfo} />
+      <CvViewerModal />
     </div>
   );
 }

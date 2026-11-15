@@ -101,14 +101,15 @@ def get_public_cv(db: Session = Depends(get_db)) -> dict:
     "/cv/download",
     summary="Stream or download the owner CV as PDF",
 )
-def download_cv(db: Session = Depends(get_db)) -> Response:
+def download_cv(download: int = 0, db: Session = Depends(get_db)) -> Response:
     """Public endpoint: streams CV PDF inline with download capability."""
     content, mime_type, filename = ProfileService(db).download_cv(db)
+    disposition = "attachment" if download == 1 else "inline"
     return Response(
         content=content,
         media_type=mime_type,
         headers={
-            "Content-Disposition": f'inline; filename="{filename}"',
+            "Content-Disposition": f'{disposition}; filename="{filename}"',
             "Cache-Control": "public, max-age=3600",
         },
     )

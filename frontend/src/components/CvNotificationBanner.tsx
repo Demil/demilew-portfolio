@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { CvInfo } from '@/types/portfolio';
-import { getCvInfo } from '@/lib/api';
+import { getCvInfo, DEFAULT_CV_INFO } from '@/lib/api';
 import { useLanguage } from '@/context/LanguageContext';
 import { FileText, Download, ExternalLink, X } from 'lucide-react';
 
@@ -14,18 +14,19 @@ interface CvNotificationBannerProps {
 
 export default function CvNotificationBanner({ cvInfo: initialCvInfo }: CvNotificationBannerProps) {
   const { t } = useLanguage();
-  const [cvInfo, setCvInfo] = useState<CvInfo | null>(initialCvInfo || null);
+  const [cvInfo, setCvInfo] = useState<CvInfo | null>(initialCvInfo || DEFAULT_CV_INFO);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     if (initialCvInfo) {
       setCvInfo(initialCvInfo);
     } else {
-      getCvInfo().then(setCvInfo).catch(() => {});
+      getCvInfo().then(setCvInfo).catch(() => { });
     }
 
     try {
-      if (sessionStorage.getItem('demilew_cv_banner_dismissed') === 'true') {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      if (isMobile || sessionStorage.getItem('demilew_cv_banner_dismissed') === 'true') {
         setDismissed(true);
       }
     } catch {
@@ -58,7 +59,7 @@ export default function CvNotificationBanner({ cvInfo: initialCvInfo }: CvNotifi
   return (
     <aside
       aria-label="Curriculum Vitae Notification"
-      className="fixed bottom-5 right-5 z-50 max-w-sm w-full px-4 sm:px-0 pointer-events-none"
+      className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 max-w-sm w-full px-3 sm:px-0 pointer-events-none"
     >
       {/* ── Minimized Floating Action Pill (When Dismissed) ── */}
       {dismissed ? (
@@ -69,8 +70,8 @@ export default function CvNotificationBanner({ cvInfo: initialCvInfo }: CvNotifi
             title="Open Curriculum Vitae notice"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-primary)] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-primary)]" />
             </span>
             <FileText className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
             <span className="font-semibold">CV</span>
@@ -86,10 +87,10 @@ export default function CvNotificationBanner({ cvInfo: initialCvInfo }: CvNotifi
         >
           {/* Top Banner Row */}
           <div className="flex items-center justify-between gap-2">
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-tight bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-tight bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/25">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-primary)] opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--accent-primary)]" />
               </span>
               <span>{t.cvNotification.badge}</span>
             </div>
@@ -122,15 +123,13 @@ export default function CvNotificationBanner({ cvInfo: initialCvInfo }: CvNotifi
 
           {/* Action Row */}
           <div className="pt-1 flex items-center gap-2">
-            <a
-              href={downloadUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--accent-primary)] hover:opacity-90 text-white text-xs font-medium transition-all shadow-sm"
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--accent-primary)] hover:opacity-90 text-[#090b10] text-xs font-semibold transition-all shadow-sm cursor-pointer"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
+              <FileText className="w-3.5 h-3.5" />
               <span>{t.cvNotification.viewPdf}</span>
-            </a>
+            </button>
 
             <a
               href={`${downloadUrl}?download=1`}

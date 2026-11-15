@@ -10,9 +10,10 @@
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-tertiary: #64748b;
-  --accent-primary: #3b82f6;
-  --accent-hover: #2563eb;
-  --accent-subtle: rgba(59, 130, 246, 0.12);
+  --accent-primary: #17e39b;
+  --accent-hover: #12c987;
+  --accent-subtle: rgba(23, 227, 155, 0.12);
+  --accent-glow: rgba(23, 227, 155, 0.3);
 }
 
 [data-theme="light"],
@@ -26,9 +27,10 @@ html.light {
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-tertiary: #64748b;
-  --accent-primary: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-subtle: rgba(37, 99, 235, 0.08);
+  --accent-primary: #059669;
+  --accent-hover: #047857;
+  --accent-subtle: rgba(5, 150, 105, 0.10);
+  --accent-glow: rgba(5, 150, 105, 0.22);
   color-scheme: light;
 }
 
@@ -50,6 +52,7 @@ html.dark {
   --color-accent-primary: var(--accent-primary);
   --color-accent-hover: var(--accent-hover);
   --color-accent-subtle: var(--accent-subtle);
+  --color-accent-glow: var(--accent-glow);
 }
 
 html {
@@ -71,5 +74,167 @@ body {
 
 ::selection {
   background-color: var(--accent-primary);
-  color: #ffffff;
+  color: #090b10;
+}
+
+/* Interactive & Animated Enhancements */
+.ambient-glow-header {
+  background: radial-gradient(circle 800px at 50% -100px,
+      var(--accent-subtle),
+      transparent 75%);
+}
+
+/* Touch & Gesture Enhancements */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.interactive-card {
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.28s ease,
+    background-color 0.25s ease;
+}
+
+/* Apply lift only to devices with mouse/hover pointer to prevent sticky hover on touch */
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-4px) scale(1.004);
+    border-color: rgba(23, 227, 155, 0.45);
+    box-shadow: 0 16px 36px -10px rgba(23, 227, 155, 0.2), 0 0 0 1px rgba(23, 227, 155, 0.22);
+  }
+}
+
+.interactive-card:active {
+  transform: scale(0.995);
+}
+
+.interactive-btn {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  touch-action: manipulation;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(23, 227, 155, 0.35);
+  }
+}
+
+.interactive-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.interactive-pill {
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+  touch-action: manipulation;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-pill:hover {
+    transform: translateY(-1.5px);
+    border-color: var(--accent-primary);
+  }
+}
+
+.interactive-pill:active {
+  transform: scale(0.96);
+}
+
+.interactive-pill:hover {
+  transform: translateY(-1.5px);
+  border-color: var(--accent-primary);
+}
+
+.subtle-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(23, 227, 155, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Staged entrance motion system */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* Stagger delay utility classes */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* Focus styles for strict keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion accessibility compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

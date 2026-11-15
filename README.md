@@ -45,6 +45,16 @@ Web Application: [http://localhost:3000](http://localhost:3000)
 
 ---
 
+## Documentation & Maintenance
+
+- **Master Technical & Maintenance Manual:** [`docs/TECHNICAL_MANUAL.md`](file:///d:/My%20site/docs/TECHNICAL_MANUAL.md) (Complete architecture, ER models, API spec, and step-by-step playbooks for CV updates, project additions, and cloud deployment).
+- **Architecture Specification:** [`docs/architecture.md`](file:///d:/My%20site/docs/architecture.md)
+- **API Reference:** [`docs/API.md`](file:///d:/My%20site/docs/API.md)
+- **Database Schema & Migrations:** [`docs/DATABASE.md`](file:///d:/My%20site/docs/DATABASE.md)
+- **Architecture Decision Records:** [`docs/DECISIONS.md`](file:///d:/My%20site/docs/DECISIONS.md)
+
+---
+
 ## Testing & Validation
 
 - **Backend Tests:**

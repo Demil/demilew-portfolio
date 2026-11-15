@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { submitContact, getCvInfo, CvInfo } from '@/lib/api';
-import { Mail, Send, CheckCircle, AlertCircle, Loader2, MapPin, Clock, FileText, Download } from 'lucide-react';
+import { submitContact, getCvInfo, CvInfo, DEFAULT_CV_INFO } from '@/lib/api';
+import { Mail, Send, CheckCircle, AlertCircle, Loader2, MapPin, Clock, FileText, Download, Phone, Globe } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
@@ -23,13 +25,13 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [cvInfo, setCvInfo] = useState<CvInfo | null>(initialCvInfo || null);
+  const [cvInfo, setCvInfo] = useState<CvInfo | null>(initialCvInfo || DEFAULT_CV_INFO);
 
   useEffect(() => {
-    if (initialCvInfo !== undefined) {
+    if (initialCvInfo) {
       setCvInfo(initialCvInfo);
     } else {
-      getCvInfo().then(setCvInfo).catch(() => { });
+      getCvInfo().then((res) => setCvInfo(res || DEFAULT_CV_INFO)).catch(() => { });
     }
   }, [initialCvInfo]);
 
@@ -78,51 +80,103 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
   };
 
   return (
-    <section id="contact" className="py-24 transition-colors">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-16 sm:py-24 transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-12 mb-12 border-b border-[var(--border-subtle)] gap-6">
-          <div className="space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold flex items-center gap-2">
-              <Mail className="w-4 h-4" /> {t.contact.eyebrow}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
-              {t.contact.heading}
-            </h2>
+        <ScrollReveal direction="up">
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-8 sm:pb-12 sm:mb-12 border-b border-[var(--border-subtle)] gap-4 sm:gap-6">
+            <div className="space-y-1.5 sm:space-y-2">
+              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold flex items-center gap-2">
+                <Mail className="w-4 h-4" /> {t.contact.eyebrow}
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
+                {t.contact.heading}
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md leading-relaxed">
+              {t.contact.subtitle}
+            </p>
           </div>
-          <p className="text-sm text-[var(--text-secondary)] max-w-md leading-relaxed">
-            {t.contact.subtitle}
-          </p>
-        </div>
+        </ScrollReveal>
 
         {/* Minimal Two-Column Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-start">
           {/* Left Column: Direct Contact Information */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-3">
-              <h3 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">
+          <ScrollReveal direction="left" delay={100} className="lg:col-span-5 space-y-5 sm:space-y-6">
+            <div className="space-y-2 sm:space-y-3">
+              <h3 className="text-lg sm:text-xl font-bold text-[var(--text-primary)] tracking-tight">
                 {t.nav.letsTalk}
               </h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Whether you represent an admissions committee, AI research lab, tech organization, or enterprise looking for senior engineering talent, my inbox is open.
+              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                Whether you have an upcoming software project, AI research inquiry, or career opportunity, feel free to reach out anytime.
               </p>
             </div>
 
-            <div className="space-y-4 pt-2 text-xs font-mono">
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
+            <div className="space-y-3 sm:space-y-4 pt-1 text-xs font-mono">
+              <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
                 <Mail className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <span className="text-[var(--text-tertiary)] block text-[11px]">{t.contact.directChannels}</span>
                   <a
-                    href="mailto:contact@demilewterefe.com"
-                    className="text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors font-medium text-sm"
+                    href="mailto:demilew05terefe@gmail.com"
+                    className="text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors font-medium text-xs sm:text-sm truncate block"
                   >
-                    contact@demilewterefe.com
+                    demilew05terefe@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
+              <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
+                <Phone className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
+                <div className="min-w-0 w-full">
+                  <span className="text-[var(--text-tertiary)] block text-[11px]">Direct Phone &amp; WhatsApp</span>
+                  <div className="flex flex-wrap items-center gap-2 font-medium text-xs sm:text-sm pt-0.5">
+                    <a
+                      href="tel:+251932045612"
+                      className="text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors py-0.5"
+                    >
+                      +251 932 045 612
+                    </a>
+                    <span className="text-[var(--text-tertiary)]">/</span>
+                    <a
+                      href="tel:+251953229831"
+                      className="text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors py-0.5"
+                    >
+                      +251 953 229 831
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
+                <Globe className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
+                <div>
+                  <span className="text-[var(--text-tertiary)] block text-[11px]">Social Profiles</span>
+                  <div className="flex items-center gap-4 pt-1 text-xs">
+                    <a
+                      href="https://www.linkedin.com/in/demilew-terefe"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors font-medium py-0.5"
+                    >
+                      <LinkedinIcon className="w-3.5 h-3.5" />
+                      <span>LinkedIn</span>
+                    </a>
+                    <span className="text-[var(--text-tertiary)]">•</span>
+                    <a
+                      href="https://github.com/Demil"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors font-medium py-0.5"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5" />
+                      <span>GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
                 <MapPin className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                 <div>
                   <span className="text-[var(--text-tertiary)] block text-[11px]">Location</span>
@@ -130,7 +184,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
+              <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
                 <Clock className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                 <div>
                   <span className="text-[var(--text-tertiary)] block text-[11px]">Typical Response Time</span>
@@ -140,7 +194,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
 
               {/* CV Download Desk Card */}
               {cvInfo && (
-                <div className="p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-3">
+                <div className="interactive-card p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2.5">
                   <div className="flex items-center gap-2.5 text-[var(--accent-primary)]">
                     <FileText className="w-4 h-4" />
                     <span className="text-xs font-semibold tracking-tight text-[var(--text-primary)]">Curriculum Vitae</span>
@@ -149,19 +203,17 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                     {cvInfo.filename} ({Math.round(cvInfo.file_size_bytes / 1024)} KB)
                   </p>
                   <div className="flex items-center gap-2 pt-1">
-                    <a
-                      href={`${API_BASE_URL}/profile/cv/download`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--accent-primary)] text-white text-xs font-medium hover:opacity-90 transition-opacity"
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
+                      className="interactive-btn inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-md bg-[var(--accent-primary)] text-[#090b10] text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer active:scale-95 flex-1 sm:flex-initial"
                     >
                       <FileText className="w-3.5 h-3.5" />
                       <span>{t.hero.viewCv}</span>
-                    </a>
+                    </button>
                     <a
                       href={`${API_BASE_URL}/profile/cv/download?download=1`}
                       download={cvInfo.filename}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[var(--border-prominent)] bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-medium transition-colors"
+                      className="interactive-btn inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-md border border-[var(--border-prominent)] bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-medium transition-colors active:scale-95 flex-1 sm:flex-initial"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>{t.hero.downloadCv}</span>
@@ -170,10 +222,10 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                 </div>
               )}
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Clean Form */}
-          <div className="lg:col-span-7 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-6 sm:p-8 shadow-sm">
+          <ScrollReveal direction="right" delay={200} className="lg:col-span-7 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 sm:p-8 shadow-sm">
             {success ? (
               <div className="py-12 text-center space-y-4">
                 <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center mx-auto">
@@ -201,7 +253,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   <div>
                     <label
                       htmlFor="name"
@@ -216,7 +268,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Dr. Alex Mercer"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
                     />
                   </div>
 
@@ -234,7 +286,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="alex.mercer@institution.org"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -253,7 +305,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="e.g. Research Collaboration / Software Engineering Opportunity"
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
                   />
                 </div>
 
@@ -271,15 +323,15 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Provide relevant context regarding your team, inquiry, or research proposal..."
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors resize-y"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors resize-y min-h-[120px]"
                   />
                 </div>
 
-                <div className="flex justify-end pt-2">
+                <div className="flex sm:justify-end pt-2">
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white text-sm font-semibold transition-colors shadow-sm"
+                    className="interactive-btn flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto min-h-[46px] rounded-lg bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-[#090b10] text-sm font-semibold transition-colors shadow-sm active:scale-95"
                   >
                     {loading ? (
                       <>
@@ -296,7 +348,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                 </div>
               </form>
             )}
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

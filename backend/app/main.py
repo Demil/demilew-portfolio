@@ -1,3 +1,4 @@
+import re
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -28,18 +29,30 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 app.add_middleware(SecurityHeadersMiddleware)
 
 # CORS configuration per Section 7 security requirements
-# Reads allowed origins from environment variable (comma-separated) or falls back to localhost
-parsed_origins = [
-    origin.strip()
-    for origin in settings.ALLOWED_ORIGINS.split(",")
-    if origin.strip()
-]
-if "http://localhost:3000" not in parsed_origins:
-    parsed_origins.append("http://localhost:3000")
+# Reads allowed origins from environment variable (comma-separated) or falls back to localhost.
+# Supports both exact origins and wildcard patterns (e.g. https://*.vercel.app).
+exact_origins: list[str] = []
+regex_patterns: list[str] = []
+
+for origin in settings.ALLOWED_ORIGINS.split(","):
+    trimmed = origin.strip()
+    if not trimmed:
+        continue
+    if "*" in trimmed:
+        pattern = "^" + re.escape(trimmed).replace(r"\*", ".*") + "$"
+        regex_patterns.append(pattern)
+    else:
+        exact_origins.append(trimmed)
+
+if "http://localhost:3000" not in exact_origins:
+    exact_origins.append("http://localhost:3000")
+
+origin_regex = "|".join(regex_patterns) if regex_patterns else None
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=parsed_origins,
+    allow_origins=exact_origins,
+    allow_origin_regex=origin_regex,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type", "X-CSRF-Token"],

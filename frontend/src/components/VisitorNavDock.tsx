@@ -68,7 +68,7 @@ export default function VisitorNavDock() {
   const prevSection = SECTIONS[currentIndex - 1];
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 transition-all duration-300">
+    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 transition-all duration-300">
       {/* Expanded Quick-Jump Menu */}
       {dockExpanded && (
         <div className="mb-2 p-2 bg-[var(--bg-surface-elevated)]/95 backdrop-blur-md border border-[var(--border-prominent)] rounded-xl shadow-xl space-y-1 animate-in fade-in slide-in-from-bottom-2 min-w-[200px]">

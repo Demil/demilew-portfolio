@@ -4,6 +4,7 @@ import { CvInfo, Profile, PublicSettings } from '@/types/portfolio';
 import { ArrowDown, Mail, ArrowUpRight, Award, Briefcase, Cpu, ShieldCheck, FileText, Download } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
+import { DEFAULT_CV_INFO } from '@/lib/api';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
@@ -15,149 +16,155 @@ interface HeroProps {
 
 export default function Hero({ profile, settings, cvInfo }: HeroProps) {
   const { t, language } = useLanguage();
+  const activeCv = cvInfo || DEFAULT_CV_INFO;
 
   const availability =
-    settings?.availability_status ||
-    'Available for select software engineering opportunities & research collaborations';
+    settings?.availability_status || 'Available for projects • Call +251932045612 / +251953229831';
 
   const headline =
     profile?.headline ||
     (language === 'am'
-      ? 'የኤአይ እና ባክኤንድ ሶፍትዌር መሃንዲስ | ተግባራዊ ማሽን ለርኒንግ እና ሲስተሞች'
-      : 'AI & Backend Software Engineer | Applied Machine Learning & Systems');
+      ? 'የኤአይ አልሚ እና ተመራማሪ | ማሽን ለርኒንግ እና ሲስተሞች'
+      : 'AI Developer & Researcher | Machine Learning & Systems');
 
   const bio = profile?.biography || t.hero.narrative;
 
   return (
-    <section id="about" className="relative pt-16 pb-20 md:pt-24 md:pb-28 border-b border-[var(--border-subtle)] transition-colors">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+    <section id="about" className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[var(--border-subtle)] transition-colors ambient-glow-header overflow-hidden">
+      {/* Decorative ambient radial glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[var(--accent-primary)]/5 blur-[120px] pointer-events-none rounded-full" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-start">
           {/* Left Column: Authoritative Editorial Profile */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-fade-in-up">
             {/* Availability Indicator */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full text-xs font-mono tracking-tight bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-mono tracking-tight bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] shadow-xs max-w-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] shrink-0 animate-pulse" />
               <span className="truncate">{availability}</span>
             </div>
 
             {/* Authoritative Primary Typography */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.08]">
-                {t.hero.headline}
+            <div className="space-y-1.5 sm:space-y-2">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.12]">
+                {language === 'am' ? 'ደምለው ተረፈ' : t.hero.headline}
               </h1>
-              <p className="text-xl sm:text-2xl font-medium text-[var(--accent-primary)] tracking-tight">
+              <p className="text-lg sm:text-2xl font-medium text-[var(--accent-primary)] tracking-tight">
                 {headline}
               </p>
             </div>
 
             {/* Editorial Narrative */}
-            <div className="space-y-4 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+            <div className="space-y-3 sm:space-y-4 text-sm sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl">
               <p>{bio}</p>
-              <p className="text-sm sm:text-base text-[var(--text-tertiary)]">
-                Specialized in architecting high-throughput REST APIs with Python and FastAPI, training hybrid deep learning architectures (CNN-LSTM) for zero-day network anomaly detection, and implementing privacy-preserving frameworks with Federated Learning and Differential Privacy.
+              <p className="text-xs sm:text-base text-[var(--text-tertiary)]">
+                Specialized in developing practical AI solutions with Python and FastAPI, training deep learning models for anomaly detection, and building reliable, scalable backend systems.
               </p>
             </div>
 
             {/* Recruiter & Client CV Pointer Highlight */}
-            {cvInfo && (
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-blue-500/5 border border-blue-500/20 text-xs">
+            {activeCv && (
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/25 text-xs transition-all hover:border-[var(--accent-primary)]/50">
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-primary)] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-primary)]" />
                 </span>
-                <span className="font-medium text-[var(--text-primary)]">{t.hero.cvCallout}</span>
+                <span className="font-medium text-[var(--text-primary)] text-xs sm:text-sm">{t.hero.cvCallout}</span>
                 <span className="text-[var(--text-tertiary)] hidden sm:inline font-mono text-[11px]">
-                  • {Math.round(cvInfo.file_size_bytes / 1024)} KB PDF
+                  • {Math.round(activeCv.file_size_bytes / 1024)} KB PDF
                 </span>
               </div>
             )}
 
-            {/* Action Triggers */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--text-primary)] text-[var(--bg-base)] hover:opacity-90 font-medium text-xs sm:text-sm transition-all shadow-sm"
-              >
-                <span>{t.hero.exploreWork}</span>
-                <ArrowDown className="w-4 h-4" />
-              </a>
+            {/* Action Triggers: Responsive Touch Layout */}
+            <div className="pt-2 space-y-2.5 sm:space-y-0 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
+              {/* Primary Mobile Button Pair */}
+              <div className="grid grid-cols-2 gap-2.5 sm:contents">
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 min-h-[44px] rounded-lg bg-[var(--accent-primary)] text-[#090b10] font-semibold text-xs sm:text-sm interactive-btn shadow-md active:scale-95 text-center"
+                >
+                  <span>{t.hero.exploreWork}</span>
+                  <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
+                </a>
 
-              <a
-                href="#research"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm transition-colors"
-              >
-                <span>{t.nav.research}</span>
-                <ArrowUpRight className="w-4 h-4 text-[var(--text-tertiary)]" />
-              </a>
-
-              {cvInfo ? (
-                <>
-                  {/* View CV inline */}
-                  <a
-                    href={`${API_BASE_URL}/profile/cv/download`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--accent-primary)] bg-[var(--bg-surface)] hover:bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-medium text-xs sm:text-sm transition-colors"
+                {activeCv ? (
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
+                    className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 min-h-[44px] rounded-lg border border-[var(--accent-primary)] bg-[var(--bg-surface)] hover:bg-[var(--accent-subtle)] text-[var(--accent-primary)] font-semibold text-xs sm:text-sm interactive-btn shadow-xs cursor-pointer active:scale-95 text-center"
                   >
-                    <FileText className="w-4 h-4" />
+                    <FileText className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 shrink-0" />
                     <span>{t.hero.viewCv}</span>
-                  </a>
-                  {/* Force Download CV */}
+                  </button>
+                ) : null}
+              </div>
+
+              {/* Secondary Mobile Button Group */}
+              <div className="grid grid-cols-3 gap-2 sm:contents">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
+                  <span>{t.nav.contact}</span>
+                </a>
+
+                <a
+                  href="#research"
+                  className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
+                >
+                  <span>{t.nav.research}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
+                </a>
+
+                {activeCv ? (
                   <a
                     href={`${API_BASE_URL}/profile/cv/download?download=1`}
-                    download={cvInfo.filename}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium text-xs sm:text-sm transition-colors"
+                    download={activeCv.filename}
+                    className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
+                    title={t.hero.downloadCv}
                   >
-                    <Download className="w-4 h-4" />
-                    <span>{t.hero.downloadCv}</span>
+                    <Download className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
+                    <span className="truncate sm:inline">PDF</span>
                   </a>
-                </>
-              ) : null}
-
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm transition-colors"
-              >
-                <Mail className="w-4 h-4 text-[var(--text-tertiary)]" />
-                <span>{t.nav.contact}</span>
-              </a>
+                ) : null}
+              </div>
             </div>
 
-            {/* Institutional Profiles */}
-            <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-[var(--text-tertiary)]">
+            {/* Connect & Profiles */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 text-xs font-mono text-[var(--text-tertiary)]">
               <span className="text-[var(--text-tertiary)]">Profiles:</span>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/demilew-terefe"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1"
               >
                 <LinkedinIcon className="w-3.5 h-3.5" />
                 <span>LinkedIn</span>
               </a>
               <span className="text-[var(--border-prominent)] hidden sm:inline">/</span>
               <a
-                href="https://github.com"
+                href="https://github.com/Demil"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
                 <span>GitHub</span>
               </a>
               <span className="text-[var(--border-prominent)] hidden sm:inline">/</span>
               <a
-                href="mailto:contact@demilewterefe.com"
-                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                href="mailto:demilew05terefe@gmail.com"
+                className="inline-flex items-center gap-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>contact@demilewterefe.com</span>
+                <span className="truncate max-w-[200px] sm:max-w-none">demilew05terefe@gmail.com</span>
               </a>
             </div>
           </div>
 
           {/* Right Column: Structured Academic & Technical Dossier */}
-          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-6 space-y-6 shadow-sm">
+          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 sm:p-6 space-y-5 sm:space-y-6 shadow-sm interactive-card animate-fade-in-up delay-200">
             {/* Dossier Header */}
             <div className="border-b border-[var(--border-subtle)] pb-4">
               <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold block mb-1">

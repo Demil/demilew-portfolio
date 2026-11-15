@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     # App
     APP_ENV: str = "development"
     DEBUG: bool = True
-    ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app,https://*.onrender.com"
 
     # Media & File Storage
     UPLOAD_DIR: str = str(Path(__file__).resolve().parent.parent.parent / "uploads")

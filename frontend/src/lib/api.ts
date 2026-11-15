@@ -99,18 +99,27 @@ export async function getPublicSettings(): Promise<PublicSettings> {
   });
 }
 
+export const DEFAULT_CV_INFO: CvInfo = {
+  id: 1,
+  filename: 'Demilew Terefe Mebratie (2).pdf',
+  file_size_bytes: 74946,
+  mime_type: 'application/pdf',
+  url: '/api/v1/profile/cv/download',
+  uploaded_at: '2026-11-14T16:50:50.000000Z',
+};
+
 export async function getCvInfo(): Promise<CvInfo | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500);
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
     const res = await fetch(`${API_BASE_URL}/profile/cv`, {
       signal: controller.signal,
       next: { revalidate: 60 },
     }).finally(() => clearTimeout(timeoutId));
-    if (!res.ok) return null;
+    if (!res.ok) return DEFAULT_CV_INFO;
     return (await res.json()) as CvInfo;
   } catch {
-    return null;
+    return DEFAULT_CV_INFO;
   }
 }
 

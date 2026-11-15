@@ -3,9 +3,9 @@ import './globals.css';
 import { Providers } from '@/components/Providers';
 
 export const metadata: Metadata = {
-  title: 'Demilew Terefe | Software Engineer',
+  title: 'Demilew Terefe | AI Developer & Researcher',
   description:
-    'Executive portfolio and research dossier of Demilew Terefe — Software Engineer and Applied AI Researcher specializing in Python, FastAPI, PyTorch, AI Security, and distributed backend architectures.',
+    'Portfolio and research of Demilew Terefe — AI Developer and Researcher specializing in Python, FastAPI, PyTorch, AI Security, and modern backend systems.',
 };
 
 export default function RootLayout({
