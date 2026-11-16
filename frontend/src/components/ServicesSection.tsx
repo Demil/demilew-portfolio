@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 import {
   Brain,
@@ -9,10 +8,7 @@ import {
   ShieldCheck,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Layers,
-  ArrowUpRight,
-  FileText,
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -46,16 +42,14 @@ const SERVICES_DATA: ServiceItem[] = [
     descriptionAm:
       'የጥልቅ ትምህርት ሞዴሎችን ማሰልጠን፣ ግላዊነትን የሚጠብቁ የዳታ ቧንቧዎችን መዘርጋት እና ለተግባራዊ ስራ ዝግጁ ማድረግ።',
     deliverablesEn: [
-      'Custom neural architecture design & testing',
-      'Anomaly detection & pattern analysis engines',
-      'Differential privacy & federated learning setups',
-      'Model performance optimization & deployment',
+      'Custom neural architecture design & benchmark testing',
+      'Anomaly detection & zero-day pattern analysis engines',
+      'Differential privacy & federated learning protocols',
     ],
     deliverablesAm: [
       'የብጁ ኒውራል ኔትወርክ አርክቴክቸር ዝግጅት እና ሙከራ',
       'የኔትወርክ ጥቃት እና ያልተለመዱ ሁኔታዎች መለያ ሞተሮች',
       'ግላዊነትን የሚጠብቁ (Differential Privacy) እና ፌዴሬትድ ስልጠናዎች',
-      'የሞዴሎችን ፍጥነት ማሳደግ እና ማመቻቸት',
     ],
     engagementEn: ['R&D Prototyping', 'Custom AI Development', 'Technical Advisory'],
     engagementAm: ['የምርምር ፕሮቶታይፕ', 'ብጁ የኤአይ ምህንድስና', 'የቴክኒክ ማማከር'],
@@ -75,13 +69,11 @@ const SERVICES_DATA: ServiceItem[] = [
     deliverablesEn: [
       'Clean RESTful APIs with OpenAPI documentation',
       'PostgreSQL schema optimization & fast query indexing',
-      'Secure JWT authentication & role-based permissions',
       'Docker containerization & automated Pytest suites',
     ],
     deliverablesAm: [
       'በደረጃው የተዘጋጀ RESTful API ከሙሉ የሰነድ ድጋፍ ጋር',
       'የ PostgreSQL ዳታቤዝ አደረጃጀት እና ፈጣን የጥያቄ ምላሽ',
-      'ደህንነቱ የተጠበቀ የ JWT ፈቃድ እና ሚና ላይ የተመሰረተ ቁጥጥር',
       'የዶከር ኮንቴይነራይዜሽን እና አውቶሜትድ የፍተሻ ስርዓቶች',
     ],
     engagementEn: ['Backend Development', 'API Architecture', 'System Modernization'],
@@ -102,13 +94,11 @@ const SERVICES_DATA: ServiceItem[] = [
     deliverablesEn: [
       'Integrated master project schedules & milestone tracking',
       'Vendor delivery coordination & SLA governance',
-      'Project progress forecasting & risk mitigation',
-      'Operational dashboards & stakeholder reporting',
+      'Operational progress dashboards & stakeholder reporting',
     ],
     deliverablesAm: [
       'የተቀናጀ ዋና የጊዜ ሰሌዳ (IMS) እና ወሳኝ የሂደት ትንተና',
       'የንዑስ ተቋራጮች ስራ አፈጻጸም እና የስምምነት ክትትል',
-      'የስራ እሴት (Earned Value) እና የስጋት ትንበያ ሪፖርቶች',
       'ለከፍተኛ አመራር የሚቀርቡ የመረጃ ዳሽቦርዶች',
     ],
     engagementEn: ['Project Planning', 'Milestone Review', 'Delivery Governance'],
@@ -118,106 +108,55 @@ const SERVICES_DATA: ServiceItem[] = [
     id: 'ai-security',
     number: '04',
     icon: ShieldCheck,
-    titleEn: 'AI Security & Privacy Reviews',
-    titleAm: 'የኤአይ ደህንነት እና የግላዊነት ፍተሻ',
-    taglineEn: 'Intrusion detection testing & model privacy assessments',
-    taglineAm: 'የኔትወርክ ጥቃት መመርመሪያ እና የሀሰተኛ ምስል/ድምፅ (Deepfake) መከላከያ ፍተሻ',
+    titleEn: 'AI Security & Adversarial Defense',
+    titleAm: 'የኤአይ ደህንነት እና ጥቃት መከላከያ',
+    taglineEn: 'Deepfake detection, model robustness & data protection',
+    taglineAm: 'የዲፕፌክ ምርመራ፣ የሞዴል ጥንካሬ ማረጋገጫ እና የመረጃ ደህንነት ኦዲት',
     descriptionEn:
-      'Evaluating vulnerabilities in machine learning systems and network architectures. Benchmarking models against attack patterns and testing privacy safeguards.',
+      'Rigorous evaluation and hardening of machine learning systems against adversarial attacks, biometric spoofing, and unauthorized data leakage.',
     descriptionAm:
-      'በማሽን ለርኒንግ ሲስተሞች እና በኔትወርክ መሠረተ ልማቶች ላይ የሚደርሱ የጥቃት አደጋዎችን መመርመር፣ የሳይበር ጥቃቶችን እና የዲፕፌክ ይዘቶችን የመለየት አቅምን መገምገም።',
+      'የማሽን ለርኒንግ ሲስተሞችን ከጥቃት መጠበቅ፣ የዲፕፌክ እና የባዮሜትሪክ ማታለሎችን መለየት እንዲሁም የመረጃ ደህንነትን ማረጋገጥ።',
     deliverablesEn: [
-      'Network anomaly detection evaluations (NSL-KDD / CICIDS)',
-      'Synthetic media & deepfake defense assessments',
-      'Differential privacy leakage checks',
-      'Clear vulnerability assessment & recommendation reports',
+      'Adversarial vulnerability assessment & penetration testing',
+      'Deepfake & synthetic media detection pipelines',
+      'Model privacy auditing & data leakage mitigation',
     ],
     deliverablesAm: [
-      'የኔትወርክ ጥቃት መከላከያ ሞዴሎችን የመቋቋም አቅም መፈተሽ',
-      'የዲፕፌክ እና አርቲፊሻል ይዘቶች መመርመሪያ ማረጋገጫ',
-      'የመረጃ ፍሰት እና የግላዊነት ጥበቃ ኦዲት',
-      'ዝርዝር የደህንነት ግምገማ እና የመፍትሄ ሃሳቦች ሪፖርት',
+      'የማሽን ለርኒንግ ሞዴሎች የደህንነት ክፍተት ፍተሻ',
+      'የዲፕፌክ እና የተፈበረኩ ምስሎች መለያ ቧንቧዎች',
+      'የሞዴል ግላዊነት ኦዲት እና የመረጃ ፍሳሽ መከላከያ',
     ],
-    engagementEn: ['Security Assessment', 'Vulnerability Auditing', 'Research Consultation'],
-    engagementAm: ['የደህንነት ግምገማ', 'የስርዓት ኦዲት', 'የምርምር ማማከር'],
+    engagementEn: ['Security Auditing', 'Model Hardening', 'Research Collaboration'],
+    engagementAm: ['የደህንነት ኦዲት', 'የሞዴል ጥንካሬ ማጠናከር', 'የምርምር ትብብር'],
   },
 ];
 
 export default function ServicesSection() {
   const { t, language } = useLanguage();
-  const [activeTab, setActiveTab] = useState<string>('all');
-
-  const handleInquire = (serviceTitle: string) => {
-    // Dispatch custom event to prefill subject and scroll to contact form
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(
-        new CustomEvent('set-contact-inquiry', {
-          detail: {
-            subject: `Inquiry: ${serviceTitle}`,
-            messagePrefix: `I am reaching out regarding your "${serviceTitle}" capabilities.`,
-          },
-        })
-      );
-    }
-  };
-
-  const filteredServices =
-    activeTab === 'all'
-      ? SERVICES_DATA
-      : SERVICES_DATA.filter((s) => s.id === activeTab);
 
   return (
-    <section id="services" className="py-16 sm:py-24 border-b border-[var(--border-subtle)] transition-colors scroll-mt-16">
+    <section id="services" className="py-16 sm:py-24 border-b border-[var(--border-subtle)] transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-8 sm:pb-12 sm:mb-12 border-b border-[var(--border-subtle)] gap-4 sm:gap-6">
-          <div className="space-y-1.5 sm:space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold flex items-center gap-2">
-              <Layers className="w-4 h-4" /> {t.services.eyebrow}
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
-              {t.services.heading}
-            </h2>
+        <ScrollReveal direction="up">
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-10 border-b border-[var(--border-subtle)] gap-4 sm:gap-6">
+            <div className="space-y-1.5 sm:space-y-2">
+              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold flex items-center gap-2">
+                <Layers className="w-4 h-4" /> {t.services.eyebrow}
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
+                {t.services.heading}
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md leading-relaxed">
+              {t.services.subtitle}
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md leading-relaxed">
-            {t.services.subtitle}
-          </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Filter Pills with Mobile Horizontal Swipe */}
-        <div className="flex items-center gap-2 mb-8 sm:mb-10 pb-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono shrink-0 min-h-[38px] transition-all active:scale-95 ${activeTab === 'all'
-              ? 'bg-[var(--accent-primary)] text-white font-medium shadow-xs'
-              : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'
-              }`}
-          >
-            {language === 'am' ? 'ሁሉም አገልግሎቶች' : 'All Offerings (04)'}
-          </button>
-          {SERVICES_DATA.map((srv) => {
-            const Icon = srv.icon;
-            const isSelected = activeTab === srv.id;
-            const label = language === 'am' ? srv.titleAm.split(' ')[0] : srv.titleEn.split(' ')[0] + ' ' + (srv.titleEn.split(' ')[1] || '');
-            return (
-              <button
-                key={srv.id}
-                onClick={() => setActiveTab(srv.id)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono shrink-0 min-h-[38px] transition-all active:scale-95 ${isSelected
-                  ? 'bg-[var(--accent-primary)] text-white font-medium shadow-xs'
-                  : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'
-                  }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Services Grid */}
+        {/* Clean 2x2 Services Grid without clutter */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {filteredServices.map((service, idx) => {
+          {SERVICES_DATA.map((service, idx) => {
             const Icon = service.icon;
             const title = language === 'am' ? service.titleAm : service.titleEn;
             const tagline = language === 'am' ? service.taglineAm : service.taglineEn;
@@ -230,11 +169,11 @@ export default function ServicesSection() {
                 <article
                   className="group relative flex flex-col justify-between h-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/50 rounded-xl p-5 sm:p-7 transition-all duration-300 interactive-card"
                 >
-                  <div className="space-y-5 sm:space-y-6">
+                  <div className="space-y-4 sm:space-y-5">
                     {/* Top Bar: Service ID & Icon */}
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] font-mono tracking-wider text-[var(--text-tertiary)] uppercase flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
                         SERVICE // {service.number}
                       </span>
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[var(--accent-primary)] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-xs">
@@ -274,14 +213,11 @@ export default function ServicesSection() {
 
                     {/* Engagement Models */}
                     <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] block">
-                        {t.services.engagementLabel}
-                      </span>
                       <div className="flex flex-wrap gap-1.5">
                         {engagements.map((eng, eIdx) => (
                           <span
                             key={eIdx}
-                            className="px-2.5 py-0.5 rounded-md bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] text-[11px] font-mono border border-[var(--border-subtle)] interactive-pill"
+                            className="px-2.5 py-0.5 rounded-md bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] text-[11px] font-mono border border-[var(--border-subtle)]"
                           >
                             {eng}
                           </span>
@@ -289,64 +225,35 @@ export default function ServicesSection() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Bottom Action Button */}
-                  <div className="pt-5 mt-5 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                    <span className="text-[11px] font-mono text-[var(--text-tertiary)] text-center sm:text-left">
-                      {language === 'am' ? 'የውይይት ጥያቄ ይላኩ' : 'Direct Advisory & Delivery'}
-                    </span>
-                    <button
-                      onClick={() => handleInquire(title)}
-                      className="inline-flex items-center justify-center gap-1.5 text-xs font-mono px-4 py-2.5 min-h-[42px] rounded-lg bg-[var(--bg-surface-elevated)] hover:bg-[var(--accent-primary)] text-[var(--text-primary)] hover:text-[#090b10] border border-[var(--border-prominent)] hover:border-[var(--accent-primary)] transition-all shadow-xs interactive-btn group/btn font-semibold active:scale-95"
-                    >
-                      <span>{t.services.inquireButton}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                    </button>
-                  </div>
                 </article>
               </ScrollReveal>
             );
           })}
         </div>
 
-        {/* Executive Collaboration Callout Box */}
-        <div className="mt-14 p-6 sm:p-8 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-[var(--accent-primary)] font-semibold">
-              <Sparkles className="w-4 h-4" />
-              <span>{language === 'am' ? 'ልዩ የትብብር እድሎች' : 'Tailored Engagements & Advisory'}</span>
-            </div>
-            <h4 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)]">
+        {/* Unified, Single Call-to-Action for Services */}
+        <div className="mt-12 p-6 sm:p-8 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+          <div className="space-y-1">
+            <h4 className="text-base sm:text-lg font-bold text-[var(--text-primary)] tracking-tight">
               {language === 'am'
                 ? 'ለድርጅትዎ ወይም ለምርምር ቡድንዎ ተስማሚ መፍትሄ ይፈልጋሉ?'
-                : 'Need custom systems engineering, research advisory, or telecom project control?'}
+                : 'Need custom systems engineering, AI research, or project control?'}
             </h4>
-            <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl">
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
               {language === 'am'
-                ? 'የተሟላ የትምህርት እና የስራ ማስረጃዎች የያዘውን CV መመልከት ወይም በቀጥታ መልእክት በመላክ መወያየት ይችላሉ።'
-                : 'Review my verified technical dossier, or initiate a direct inquiry to discuss scope, deliverables, and timelines.'}
+                ? 'በቀጥታ መልእክት በመላክ ስለ ስራዎ ወሰን እና የጊዜ ሰሌዳ እንወያይ።'
+                : 'Initiate a direct inquiry to discuss scope, deliverables, and timelines.'}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <a
-              href="#contact"
-              onClick={() => handleInquire('General Technical Engagement')}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[var(--accent-primary)] text-white text-xs font-semibold hover:opacity-95 transition-opacity shadow-sm"
-            >
-              <span>{t.nav.letsTalk}</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] text-xs font-medium hover:bg-[var(--bg-muted)] transition-colors"
-            >
-              <FileText className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
-              <span>{language === 'am' ? 'የተሟላ ማስረጃ ይመልከቱ' : 'Review Credentials'}</span>
-            </a>
-          </div>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--accent-primary)] text-[#090b10] text-xs font-semibold hover:opacity-95 transition-all shadow-sm shrink-0 interactive-btn"
+          >
+            <span>{t.nav.letsTalk}</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </section>
   );
 }
-

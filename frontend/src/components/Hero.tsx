@@ -1,12 +1,10 @@
 'use client';
 
 import { CvInfo, Profile, PublicSettings } from '@/types/portfolio';
-import { ArrowDown, Mail, ArrowUpRight, Award, Briefcase, Cpu, ShieldCheck, FileText, Download } from 'lucide-react';
+import { ArrowDown, Mail, Award, Briefcase, Cpu, ShieldCheck, FileText } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { DEFAULT_CV_INFO } from '@/lib/api';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 interface HeroProps {
   profile?: Profile;
@@ -27,14 +25,17 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
       ? 'የኤአይ አልሚ እና ተመራማሪ | ማሽን ለርኒንግ እና ሲስተሞች'
       : 'AI Developer & Researcher | Machine Learning & Systems');
 
-  const bio = profile?.biography || t.hero.narrative;
+  const bio =
+    language === 'am'
+      ? 'በጥልቅ ትምህርት የደህንነት ስርዓቶች፣ በኔትወርክ ጥቃት መከላከል እና በአስተማማኝ የባክኤንድ አርክቴክቸር ላይ ያተኮረ የሶፍትዌር መሃንዲስ እና የኤአይ ተመራማሪ።'
+      : (profile?.biography || 'Software engineer and applied AI researcher specializing in deep learning security systems, intelligent anomaly detection, and resilient backend architectures.');
 
   return (
     <section id="about" className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[var(--border-subtle)] transition-colors ambient-glow-header overflow-hidden">
       {/* Decorative ambient radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[var(--accent-primary)]/5 blur-[120px] pointer-events-none rounded-full" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
           {/* Left Column: Authoritative Editorial Profile */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-fade-in-up">
             {/* Availability Indicator */}
@@ -53,84 +54,38 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               </p>
             </div>
 
-            {/* Editorial Narrative */}
-            <div className="space-y-3 sm:space-y-4 text-sm sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+            {/* Editorial Narrative - Clear, crisp, no redundant repetition */}
+            <div className="space-y-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
               <p>{bio}</p>
-              <p className="text-xs sm:text-base text-[var(--text-tertiary)]">
-                Specialized in developing practical AI solutions with Python and FastAPI, training deep learning models for anomaly detection, and building reliable, scalable backend systems.
+              <p className="text-xs sm:text-sm text-[var(--text-tertiary)]">
+                {language === 'am'
+                  ? 'በ Python እና FastAPI ተግባራዊ የኤአይ መፍትሄዎችን መገንባት፣ የዲፕ ለርኒንግ ጥቃት መከላከያ ሞዴሎችን ማሰልጠን እና አስተማማኝ ስርዓቶችን መዘርጋት።'
+                  : 'Passionate about engineering practical AI solutions with Python and FastAPI, training deep learning models for anomaly detection, and building reliable, scalable systems.'}
               </p>
             </div>
 
-            {/* Recruiter & Client CV Pointer Highlight */}
-            {activeCv && (
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/25 text-xs transition-all hover:border-[var(--accent-primary)]/50">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-primary)] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-primary)]" />
-                </span>
-                <span className="font-medium text-[var(--text-primary)] text-xs sm:text-sm">{t.hero.cvCallout}</span>
-                <span className="text-[var(--text-tertiary)] hidden sm:inline font-mono text-[11px]">
-                  • {Math.round(activeCv.file_size_bytes / 1024)} KB PDF
-                </span>
-              </div>
-            )}
+            {/* Action Triggers: 2 Clear, Uncluttered Actions */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href="#projects"
+                className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] rounded-lg bg-[var(--accent-primary)] text-[#090b10] font-semibold text-xs sm:text-sm interactive-btn shadow-md active:scale-95 text-center"
+              >
+                <span>{t.hero.exploreWork}</span>
+                <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
+              </a>
 
-            {/* Action Triggers: Responsive Touch Layout */}
-            <div className="pt-2 space-y-2.5 sm:space-y-0 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
-              {/* Primary Mobile Button Pair */}
-              <div className="grid grid-cols-2 gap-2.5 sm:contents">
-                <a
-                  href="#projects"
-                  className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 min-h-[44px] rounded-lg bg-[var(--accent-primary)] text-[#090b10] font-semibold text-xs sm:text-sm interactive-btn shadow-md active:scale-95 text-center"
+              {activeCv ? (
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
+                  className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] rounded-lg border border-[var(--accent-primary)] bg-[var(--bg-surface)] hover:bg-[var(--accent-subtle)] text-[var(--accent-primary)] font-semibold text-xs sm:text-sm interactive-btn shadow-xs cursor-pointer active:scale-95 text-center"
                 >
-                  <span>{t.hero.exploreWork}</span>
-                  <ArrowDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
-                </a>
-
-                {activeCv ? (
-                  <button
-                    onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
-                    className="group inline-flex items-center justify-center gap-2 px-4 sm:px-5 min-h-[44px] rounded-lg border border-[var(--accent-primary)] bg-[var(--bg-surface)] hover:bg-[var(--accent-subtle)] text-[var(--accent-primary)] font-semibold text-xs sm:text-sm interactive-btn shadow-xs cursor-pointer active:scale-95 text-center"
-                  >
-                    <FileText className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 shrink-0" />
-                    <span>{t.hero.viewCv}</span>
-                  </button>
-                ) : null}
-              </div>
-
-              {/* Secondary Mobile Button Group */}
-              <div className="grid grid-cols-3 gap-2 sm:contents">
-                <a
-                  href="#contact"
-                  className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
-                >
-                  <Mail className="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
-                  <span>{t.nav.contact}</span>
-                </a>
-
-                <a
-                  href="#research"
-                  className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
-                >
-                  <span>{t.nav.research}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
-                </a>
-
-                {activeCv ? (
-                  <a
-                    href={`${API_BASE_URL}/profile/cv/download?download=1`}
-                    download={activeCv.filename}
-                    className="group inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 min-h-[44px] rounded-lg border border-[var(--border-prominent)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium text-xs sm:text-sm interactive-btn shadow-xs active:scale-95 text-center"
-                    title={t.hero.downloadCv}
-                  >
-                    <Download className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
-                    <span className="truncate sm:inline">PDF</span>
-                  </a>
-                ) : null}
-              </div>
+                  <FileText className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 shrink-0" />
+                  <span>{t.hero.viewCv}</span>
+                </button>
+              ) : null}
             </div>
 
-            {/* Connect & Profiles */}
+            {/* Connect & Direct Links */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 text-xs font-mono text-[var(--text-tertiary)]">
               <span className="text-[var(--text-tertiary)]">Profiles:</span>
               <a
@@ -164,14 +119,14 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
           </div>
 
           {/* Right Column: Structured Academic & Technical Dossier */}
-          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 sm:p-6 space-y-5 sm:space-y-6 shadow-sm interactive-card animate-fade-in-up delay-200">
+          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-5 sm:p-6 space-y-5 shadow-sm interactive-card animate-fade-in-up delay-200">
             {/* Dossier Header */}
             <div className="border-b border-[var(--border-subtle)] pb-4">
               <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold block mb-1">
                 {t.hero.verifiedDossier}
               </span>
               <h2 className="text-lg font-bold text-[var(--text-primary)] tracking-tight">
-                {t.hero.headline}
+                {language === 'am' ? 'ደምለው ተረፈ' : t.hero.headline}
               </h2>
               <p className="text-xs text-[var(--text-tertiary)] mt-0.5">
                 Addis Ababa, Ethiopia • Software Engineering &amp; Applied AI

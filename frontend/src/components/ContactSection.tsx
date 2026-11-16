@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { submitContact, getCvInfo, CvInfo, DEFAULT_CV_INFO } from '@/lib/api';
-import { Mail, Send, CheckCircle, AlertCircle, Loader2, MapPin, Clock, FileText, Download, Phone, Globe } from 'lucide-react';
+import { Mail, Send, CheckCircle, AlertCircle, Loader2, MapPin, Clock, Phone, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
 import ScrollReveal from '@/components/ScrollReveal';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 interface ContactSectionProps {
   cvInfo?: CvInfo | null;
@@ -25,15 +23,6 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [cvInfo, setCvInfo] = useState<CvInfo | null>(initialCvInfo || DEFAULT_CV_INFO);
-
-  useEffect(() => {
-    if (initialCvInfo) {
-      setCvInfo(initialCvInfo);
-    } else {
-      getCvInfo().then((res) => setCvInfo(res || DEFAULT_CV_INFO)).catch(() => { });
-    }
-  }, [initialCvInfo]);
 
   useEffect(() => {
     const handleSetInquiry = (event: Event) => {
@@ -129,7 +118,7 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
               <div className="interactive-card flex items-center gap-3 p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs">
                 <Phone className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                 <div className="min-w-0 w-full">
-                  <span className="text-[var(--text-tertiary)] block text-[11px]">Direct Phone &amp; WhatsApp</span>
+                  <span className="text-[var(--text-tertiary)] block text-[11px]">Direct Phone &amp; Channels</span>
                   <div className="flex flex-wrap items-center gap-2 font-medium text-xs sm:text-sm pt-0.5">
                     <a
                       href="tel:+251932045612"
@@ -188,78 +177,45 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                 <Clock className="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                 <div>
                   <span className="text-[var(--text-tertiary)] block text-[11px]">Typical Response Time</span>
-                  <span className="text-[var(--text-secondary)]">Within 24 to 48 business hours</span>
+                  <span className="text-[var(--text-secondary)]">Within 24 business hours</span>
                 </div>
               </div>
-
-              {/* CV Download Desk Card */}
-              {cvInfo && (
-                <div className="interactive-card p-3.5 sm:p-4 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2.5">
-                  <div className="flex items-center gap-2.5 text-[var(--accent-primary)]">
-                    <FileText className="w-4 h-4" />
-                    <span className="text-xs font-semibold tracking-tight text-[var(--text-primary)]">Curriculum Vitae</span>
-                  </div>
-                  <p className="text-[11px] text-[var(--text-secondary)] font-mono truncate">
-                    {cvInfo.filename} ({Math.round(cvInfo.file_size_bytes / 1024)} KB)
-                  </p>
-                  <div className="flex items-center gap-2 pt-1">
-                    <button
-                      onClick={() => window.dispatchEvent(new CustomEvent('open-cv-viewer'))}
-                      className="interactive-btn inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-md bg-[var(--accent-primary)] text-[#090b10] text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer active:scale-95 flex-1 sm:flex-initial"
-                    >
-                      <FileText className="w-3.5 h-3.5" />
-                      <span>{t.hero.viewCv}</span>
-                    </button>
-                    <a
-                      href={`${API_BASE_URL}/profile/cv/download?download=1`}
-                      download={cvInfo.filename}
-                      className="interactive-btn inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[40px] rounded-md border border-[var(--border-prominent)] bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-medium transition-colors active:scale-95 flex-1 sm:flex-initial"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>{t.hero.downloadCv}</span>
-                    </a>
-                  </div>
-                </div>
-              )}
             </div>
           </ScrollReveal>
 
-          {/* Right Column: Clean Form */}
-          <ScrollReveal direction="right" delay={200} className="lg:col-span-7 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 sm:p-8 shadow-sm">
+          {/* Right Column: Clean Contact Form */}
+          <ScrollReveal direction="right" delay={200} className="lg:col-span-7 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-5 sm:p-8 shadow-sm">
             {success ? (
               <div className="py-12 text-center space-y-4">
                 <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center mx-auto">
                   <CheckCircle className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Inquiry Dispatched Successfully
+                  Message Dispatched Successfully
                 </h3>
                 <p className="text-sm text-[var(--text-secondary)] max-w-sm mx-auto leading-relaxed">
                   {t.contact.successMessage}
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="mt-4 px-5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] hover:bg-[var(--bg-muted)] text-[var(--text-primary)] border border-[var(--border-prominent)] text-xs font-mono font-medium transition-colors"
+                  className="mt-4 px-5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] hover:bg-[var(--bg-muted)] text-[var(--text-primary)] border border-[var(--border-prominent)] text-xs font-mono font-medium transition-colors cursor-pointer"
                 >
-                  Send Another Inquiry
+                  Send Another Message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                 {error && (
                   <div className="p-4 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                    <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{error}</span>
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1.5"
-                    >
-                      {t.contact.name} *
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label htmlFor="name" className="block text-xs font-mono text-[var(--text-secondary)]">
+                      {t.contact.name} <span className="text-[var(--accent-primary)]">*</span>
                     </label>
                     <input
                       id="name"
@@ -267,17 +223,14 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Dr. Alex Mercer"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
+                      placeholder="e.g. Dr. Abebe / Recruiter"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-prominent)] text-[var(--text-primary)] text-xs sm:text-sm focus:outline-hidden focus:border-[var(--accent-primary)] transition-colors placeholder:text-[var(--text-tertiary)]"
                     />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1.5"
-                    >
-                      {t.contact.email} *
+                  <div className="space-y-1.5">
+                    <label htmlFor="email" className="block text-xs font-mono text-[var(--text-secondary)]">
+                      {t.contact.email} <span className="text-[var(--accent-primary)]">*</span>
                     </label>
                     <input
                       id="email"
@@ -285,18 +238,15 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="alex.mercer@institution.org"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
+                      placeholder="e.g. contact@domain.com"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-prominent)] text-[var(--text-primary)] text-xs sm:text-sm focus:outline-hidden focus:border-[var(--accent-primary)] transition-colors placeholder:text-[var(--text-tertiary)]"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1.5"
-                  >
-                    {t.contact.subject} *
+                <div className="space-y-1.5">
+                  <label htmlFor="subject" className="block text-xs font-mono text-[var(--text-secondary)]">
+                    {t.contact.subject} <span className="text-[var(--accent-primary)]">*</span>
                   </label>
                   <input
                     id="subject"
@@ -304,48 +254,43 @@ export default function ContactSection({ cvInfo: initialCvInfo }: ContactSection
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. Research Collaboration / Software Engineering Opportunity"
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors min-h-[44px]"
+                    placeholder="Project Inquiry / AI Research / Career"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-prominent)] text-[var(--text-primary)] text-xs sm:text-sm focus:outline-hidden focus:border-[var(--accent-primary)] transition-colors placeholder:text-[var(--text-tertiary)]"
                   />
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1.5"
-                  >
-                    {t.contact.message} *
+                <div className="space-y-1.5">
+                  <label htmlFor="message" className="block text-xs font-mono text-[var(--text-secondary)]">
+                    {t.contact.message} <span className="text-[var(--accent-primary)]">*</span>
                   </label>
                   <textarea
                     id="message"
                     required
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Provide relevant context regarding your team, inquiry, or research proposal..."
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-base)] border border-[var(--border-prominent)] text-base sm:text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors resize-y min-h-[120px]"
+                    placeholder="Briefly describe your objectives, timelines, or questions..."
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-prominent)] text-[var(--text-primary)] text-xs sm:text-sm focus:outline-hidden focus:border-[var(--accent-primary)] transition-colors resize-none placeholder:text-[var(--text-tertiary)] leading-relaxed"
                   />
                 </div>
 
-                <div className="flex sm:justify-end pt-2">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="interactive-btn flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto min-h-[46px] rounded-lg bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-[#090b10] text-sm font-semibold transition-colors shadow-sm active:scale-95"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>{t.contact.sending}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>{t.contact.send}</span>
-                      </>
-                    )}
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent-primary)] text-[#090b10] text-xs sm:text-sm font-semibold hover:opacity-95 disabled:opacity-50 transition-all shadow-sm active:scale-95 cursor-pointer font-mono"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{t.contact.sending}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{t.contact.send}</span>
+                      <Send className="w-3.5 h-3.5" />
+                    </>
+                  )}
+                </button>
               </form>
             )}
           </ScrollReveal>

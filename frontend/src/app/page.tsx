@@ -7,8 +7,7 @@ import SkillsSection from '@/components/SkillsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import CvNotificationBanner from '@/components/CvNotificationBanner';
-import VisitorNavDock from '@/components/VisitorNavDock';
+import ScrollToTop from '@/components/ScrollToTop';
 import CvViewerModal from '@/components/CvViewerModal';
 import {
   getCvInfo,
@@ -49,8 +48,7 @@ export default async function Home() {
         <ContactSection cvInfo={cvInfo} />
       </main>
       <Footer />
-      <VisitorNavDock />
-      <CvNotificationBanner cvInfo={cvInfo} />
+      <ScrollToTop />
       <CvViewerModal />
     </div>
   );
