@@ -25,11 +25,6 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
       ? 'የኤአይ አልሚ እና ተመራማሪ | ማሽን ለርኒንግ እና ሲስተሞች'
       : 'AI Developer & Researcher | Machine Learning & Systems');
 
-  const bio =
-    language === 'am'
-      ? 'በጥልቅ ትምህርት የደህንነት ስርዓቶች፣ በኔትወርክ ጥቃት መከላከል እና በአስተማማኝ የባክኤንድ አርክቴክቸር ላይ ያተኮረ የሶፍትዌር መሃንዲስ እና የኤአይ ተመራማሪ።'
-      : (profile?.biography || 'Software engineer and applied AI researcher specializing in deep learning security systems, intelligent anomaly detection, and resilient backend architectures.');
-
   return (
     <section id="about" className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[var(--border-subtle)] transition-colors ambient-glow-header overflow-hidden">
       {/* Decorative ambient radial glow */}
@@ -54,13 +49,22 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               </p>
             </div>
 
-            {/* Editorial Narrative - Clear, crisp, no redundant repetition */}
+            {/* Editorial Narrative: Three Strong Sentences Highlighting Core Professional Experience */}
             <div className="space-y-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-              <p>{bio}</p>
+              <p>
+                {language === 'am'
+                  ? 'በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ ውስጥ የፕሮጀክት ቁጥጥር ስራ አስኪያጅ (PCM) በመሆን መጠነ-ሰፊ የቴሌኮም ስራዎችን፣ የጊዜ ሰሌዳ ቁጥጥርን እና ወሳኝ ፕሮጀክቶችን በከፍተኛ የአሰራር ጥራት እመራለሁ።'
+                  : 'As Project Control Manager at Huawei Technologies Ethiopia, I orchestrate enterprise telecom operations, deliver milestone governance, and manage mission-critical deployments with strict SLA precision.'}
+              </p>
+              <p>
+                {language === 'am'
+                  ? 'በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በዳታ ሳይንስ መሃንዲስነት የኔትወርክ ጥቃትን የሚከላከሉ እና ያልተለመዱ ሁኔታዎችን የሚለዩ የጥልቅ ትምህርት (Deep Learning) የደህንነት ስርዓቶችን ገንብቻለሁ።'
+                  : 'At the Information Network Security Administration (INSA), I engineered deep learning anomaly detection pipelines and advanced security models for high-stakes threat intelligence.'}
+              </p>
               <p className="text-xs sm:text-sm text-[var(--text-tertiary)]">
                 {language === 'am'
-                  ? 'በ Python እና FastAPI ተግባራዊ የኤአይ መፍትሄዎችን መገንባት፣ የዲፕ ለርኒንግ ጥቃት መከላከያ ሞዴሎችን ማሰልጠን እና አስተማማኝ ስርዓቶችን መዘርጋት።'
-                  : 'Passionate about engineering practical AI solutions with Python and FastAPI, training deep learning models for anomaly detection, and building reliable, scalable systems.'}
+                  ? 'ይህንን የስራ አመራር ብቃት ከተግባራዊ የሲስተም አርክቴክቸር ጋር በማጣመር በ Python፣ FastAPI እና PostgreSQL ፈጣን፣ አስተማማኝ እና ተጨባጭ ውጤት የሚያስገኙ የኤአይ መፍትሄዎችን እገነባለሁ።'
+                  : 'I bridge enterprise delivery management with hands-on systems architecture, building production-ready FastAPI microservices and scalable AI solutions tailored for real-world impact.'}
               </p>
             </div>
 

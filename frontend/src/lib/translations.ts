@@ -114,7 +114,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'Demilew Terefe',
       highDistinction: 'Bahir Dar University (CGPA 3.84/4.00)',
       narrative:
-        'Software developer and AI researcher focused on smart security systems, machine learning models, and reliable web applications.',
+        'As Project Control Manager at Huawei Technologies Ethiopia, I orchestrate enterprise telecom operations, deliver milestone governance, and manage mission-critical deployments with strict SLA precision. At INSA, I engineered deep learning anomaly detection pipelines and advanced security models for threat intelligence. I bridge enterprise delivery management with hands-on systems architecture, building production-ready FastAPI microservices and scalable AI solutions tailored for real-world impact.',
       downloadCv: 'Download CV',
       viewCv: 'View CV',
       cvNotUploaded: 'CV not yet available',
@@ -215,7 +215,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'ደምለው ተረፈ',
       highDistinction: 'ከባህር ዳር ዩኒቨርሲቲ (CGPA 3.84/4.00)',
       narrative:
-        'ከባህር ዳር ዩኒቨርሲቲ የተመረቀ የሶፍትዌር እና የኤአይ ባለሙያ። ብልህ የደህንነት ስርዓቶችን፣ የተግባር ማሽን ለርኒንግ ሞዴሎችን እና ዘመናዊ የዌብ መተግበሪያዎችን ይገነባል።',
+        'በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ ውስጥ የፕሮጀክት ቁጥጥር ስራ አስኪያጅ (PCM) በመሆን መጠነ-ሰፊ የቴሌኮም ስራዎችን፣ የጊዜ ሰሌዳ ቁጥጥርን እና ወሳኝ ፕሮጀክቶችን በከፍተኛ የአሰራር ጥራት እመራለሁ። በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በዳታ ሳይንስ መሃንዲስነት የኔትወርክ ጥቃትን የሚከላከሉ እና ያልተለመዱ ሁኔታዎችን የሚለዩ የጥልቅ ትምህርት የደህንነት ስርዓቶችን ገንብቻለሁ። ይህንን የስራ አመራር ብቃት ከተግባራዊ የሲስተም አርክቴክቸር ጋር በማጣመር በ Python፣ FastAPI እና PostgreSQL ፈጣን፣ አስተማማኝ እና ተጨባጭ ውጤት የሚያስገኙ የኤአይ መፍትሄዎችን እገነባለሁ።',
       downloadCv: 'CV ያውርዱ',
       viewCv: 'CV ይመልከቱ',
       cvNotUploaded: 'CV እስካሁን አልተጫነም',
