@@ -65,10 +65,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             <div className="space-y-1.5 sm:space-y-2">
               <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold flex items-center gap-2">
                 <FolderGit2 className="w-4 h-4" />{' '}
-                {language === 'am' ? 'የተመረጡ ሥራዎች እና መፍትሄዎች' : 'Projects & Core Capabilities'}
+                {language === 'am' ? 'የተመረጡ ሥራዎች' : t.projects.eyebrow}
               </span>
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
-                {language === 'am' ? 'ፕሮጀክቶች እና የምህንድስና መፍትሄዎች' : 'Featured Projects & Solutions'}
+                {language === 'am' ? 'ፕሮጀክቶች እና መፍትሄዎች' : 'Projects & Solutions'}
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md leading-relaxed">

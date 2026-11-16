@@ -20,10 +20,9 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
     settings?.availability_status || 'Available for projects • Call +251932045612 / +251953229831';
 
   const headline =
-    profile?.headline ||
-    (language === 'am'
-      ? 'የኤአይ አልሚ እና ተመራማሪ | ማሽን ለርኒንግ እና ሲስተሞች'
-      : 'AI Developer & Researcher | Machine Learning & Systems');
+    language === 'am'
+      ? 'የኤአይ አልሚ እና ተመራማሪ | የማሽን ለርኒንግ መሐንዲስ'
+      : 'AI Developer & Researcher | Machine Learning Engineer';
 
   return (
     <section id="about" className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[var(--border-subtle)] transition-colors ambient-glow-header overflow-hidden">

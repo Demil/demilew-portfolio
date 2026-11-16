@@ -22,7 +22,7 @@ class ProfileRepository(BaseRepository[Profile]):
         if not profile:
             profile = self._create(
                 full_name="Demilew Terefe",
-                headline="Software Engineer & Applied AI Researcher",
+                headline="AI Developer & Researcher | Machine Learning Engineer",
                 biography=(
                     "Software engineer and computer scientist with a focus on full-stack architecture, "
                     "distributed systems, and applied artificial intelligence."

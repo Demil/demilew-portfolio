@@ -22,7 +22,7 @@ def seed_database(db: Session) -> None:
     if db.query(Profile).count() == 0:
         profile = Profile(
             full_name="Demilew Terefe",
-            headline="AI & Backend Software Engineer | Applied Machine Learning & Systems",
+            headline="AI Developer & Researcher | Machine Learning Engineer",
             biography=(
                 "Software Engineer and Applied AI Researcher with a strong focus on distributed backend architectures, "
                 "machine learning security, and privacy-preserving AI. Graduated with a Bachelor of Science in Software "

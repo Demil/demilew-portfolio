@@ -100,7 +100,7 @@ export const translations: Record<Language, Translations> = {
     nav: {
       about: 'About',
       services: 'Services',
-      projects: 'Projects',
+      projects: 'Projects & Solutions',
       research: 'Research',
       skills: 'Skills',
       experience: 'Experience',
@@ -119,7 +119,7 @@ export const translations: Record<Language, Translations> = {
       viewCv: 'View CV',
       cvNotUploaded: 'CV not yet available',
       cvCallout: 'Looking to collaborate or hire? Check out my verified Curriculum Vitae',
-      exploreWork: 'View Projects',
+      exploreWork: 'Projects & Solutions',
       verifiedDossier: 'Background & Credentials',
       academicHonors: 'B.Sc. in Software Engineering — CGPA 3.84/4.00',
       industryExperience: 'Huawei Technologies PCM & INSA Data Science',
@@ -135,7 +135,7 @@ export const translations: Record<Language, Translations> = {
     },
     projects: {
       eyebrow: 'Portfolio',
-      heading: 'Featured Projects',
+      heading: 'Projects & Solutions',
       subtitle:
         'Real-world systems built for cybersecurity, machine learning, and intelligent document search.',
       viewCaseStudy: 'View Project',
@@ -201,7 +201,7 @@ export const translations: Record<Language, Translations> = {
     nav: {
       about: 'ስለ እኔ',
       services: 'አገልግሎቶች',
-      projects: 'ፕሮጀክቶች',
+      projects: 'ፕሮጀክቶች እና መፍትሄዎች',
       research: 'ጥናቶች',
       skills: 'ክህሎቶች',
       experience: 'የሥራ ልምድ',
@@ -220,7 +220,7 @@ export const translations: Record<Language, Translations> = {
       viewCv: 'CV ይመልከቱ',
       cvNotUploaded: 'CV እስካሁን አልተጫነም',
       cvCallout: 'አብረው ለመስራት ወይም ለመቅጠር ይፈልጋሉ? የተረጋገጠ CV ይመልከቱ',
-      exploreWork: 'ፕሮጀክቶችን ይመልከቱ',
+      exploreWork: 'ፕሮጀክቶች እና መፍትሄዎች',
       verifiedDossier: 'ትምህርት እና የሥራ ልምድ',
       academicHonors: 'የሶፍትዌር ምህንድስና ባችለር — CGPA 3.84/4.00',
       industryExperience: 'የሁዋዌ ቴሌኮም PCM እና የኢንሳ (INSA) ዳታ ሳይንስ',
@@ -236,7 +236,7 @@ export const translations: Record<Language, Translations> = {
     },
     projects: {
       eyebrow: 'የተመረጡ ሥራዎች',
-      heading: 'ፕሮጀክቶች',
+      heading: 'ፕሮጀክቶች እና መፍትሄዎች',
       subtitle:
         'ለሳይበር ደህንነት፣ ለማሽን ለርኒንግ እና ለመረጃ ፍለጋ የተሰሩ እውነተኛ ሲስተሞች።',
       viewCaseStudy: 'ዝርዝሩን ይመልከቱ',
