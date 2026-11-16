@@ -114,7 +114,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'Demilew Terefe',
       highDistinction: 'Bahir Dar University (CGPA 3.84/4.00)',
       narrative:
-        'My career path evolved from software engineering and cybersecurity research at the Information Network Security Administration (INSA) to leading enterprise telecom deployments as Project Control Manager at Huawei Technologies Ethiopia. Today, my technical focus is centered on applied AI security, zero-day network intrusion detection architectures, privacy-preserving deep learning, and resilient FastAPI backend systems. By pairing structured telecom delivery governance with advanced machine learning engineering, I build production-grade, reliable digital systems that solve critical real-world problems.',
+        'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.',
       downloadCv: 'Download CV',
       viewCv: 'View CV',
       cvNotUploaded: 'CV not yet available',
@@ -215,7 +215,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'ደምለው ተረፈ',
       highDistinction: 'ከባህር ዳር ዩኒቨርሲቲ (CGPA 3.84/4.00)',
       narrative:
-        'የሙያ ጉዞዬ በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በሶፍትዌር ምህንድስና እና በሳይበር ደህንነት ምርምር ተጀምሮ፣ በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ መጠነ-ሰፊ የቴሌኮም ስራዎችን በፕሮጀክት ቁጥጥር ስራ አስኪያጅነት (PCM) ወደመምራት አድጓል። ዋና የቴክኒክ እና የምርምር ትኩረቴ በኤአይ ደህንነት (AI Security)፣ አዳዲስ የኔትወርክ ጥቃቶችን መለየት (Zero-Day Intrusion Detection)፣ ግላዊነትን በሚጠብቅ ዲፕ ለርኒንግ እና በጠንካራ የ FastAPI ባክኤንድ ሲስተሞች ላይ ያተኮረ ነው። ጥብቅ የፕሮጀክት አመራር ልምዴን ከተግባራዊ ማሽን ለርኒንግ ምህንድስና ጋር በማጣመር ተጨባጭ ችግሮችን የሚፈቱ አስተማማኝ፣ ፈጣን እና ደህንነታቸው የተጠበቀ ዘመናዊ ሲስተሞችን እገነባለሁ።',
+        'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞች ላይ ነው።',
       downloadCv: 'CV ያውርዱ',
       viewCv: 'CV ይመልከቱ',
       cvNotUploaded: 'CV እስካሁን አልተጫነም',

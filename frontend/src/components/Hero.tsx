@@ -49,24 +49,12 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               </p>
             </div>
 
-            {/* Editorial Narrative: Three Short, Punchy Sentences */}
-            <div className="space-y-2.5 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-              <p>
-                {language === 'am'
-                  ? 'ሙያዬ ከ INSA ሳይበር ደህንነት ምርምር ተጀምሮ፣ ዛሬ በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ የፕሮጀክት ቁጥጥር ስራ አስኪያጅ (PCM) ሆኜ ትልልቅ የቴሌኮም ስራዎችን እመራለሁ።'
-                  : 'From cybersecurity research at INSA to leading enterprise telecom deployments as Project Control Manager at Huawei Technologies Ethiopia.'}
-              </p>
-              <p>
-                {language === 'am'
-                  ? 'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞችን መገንባት ነው።'
-                  : 'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.'}
-              </p>
-              <p className="text-xs sm:text-sm text-[var(--text-tertiary)]">
-                {language === 'am'
-                  ? 'ጥብቅ የፕሮጀክት አስተዳደር ልምድ ከ FastAPI እና ማሽን ለርኒንግ ምህንድስና ጋር አጣምሬ አስተማማኝ፣ ወሳኝ ሲስተሞችን እሰራለሁ።'
-                  : 'I combine project governance with FastAPI and ML engineering to build reliable, impactful systems.'}
-              </p>
-            </div>
+            {/* Editorial Narrative: Ultra-Crisp Single Focus Statement */}
+            <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+              {language === 'am'
+                ? 'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞች ላይ ነው።'
+                : 'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.'}
+            </p>
 
             {/* Action Triggers: 2 Clear, Uncluttered Actions */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
