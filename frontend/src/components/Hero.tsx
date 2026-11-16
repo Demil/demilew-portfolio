@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { CvInfo, Profile, PublicSettings } from '@/types/portfolio';
-import { ArrowDown, Mail, Award, Briefcase, Cpu, ShieldCheck, FileText } from 'lucide-react';
+import { ArrowDown, Mail, Award, Briefcase, Cpu, ShieldCheck, FileText, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { DEFAULT_CV_INFO } from '@/lib/api';
@@ -14,6 +15,7 @@ interface HeroProps {
 
 export default function Hero({ profile, settings, cvInfo }: HeroProps) {
   const { t, language } = useLanguage();
+  const [photoSrc, setPhotoSrc] = useState('/profile.jpg');
   const activeCv = cvInfo || DEFAULT_CV_INFO;
 
   const availability =
@@ -109,19 +111,45 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
             </div>
           </div>
 
-          {/* Right Column: Structured Academic & Technical Dossier */}
-          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-5 sm:p-6 space-y-5 shadow-sm interactive-card animate-fade-in-up delay-200">
-            {/* Dossier Header */}
-            <div className="border-b border-[var(--border-subtle)] pb-4">
-              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--accent-primary)] font-semibold block mb-1">
-                {t.hero.verifiedDossier}
-              </span>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] tracking-tight">
-                {language === 'am' ? 'ደምለው ተረፈ' : t.hero.headline}
-              </h2>
-              <p className="text-xs text-[var(--text-tertiary)] mt-0.5">
-                Addis Ababa, Ethiopia • Software Engineering &amp; Applied AI
-              </p>
+          {/* Right Column: Professional Profile Photo & Verified Dossier */}
+          <div className="lg:col-span-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm interactive-card animate-fade-in-up delay-200">
+            {/* Professional Profile Photo & Identity Section */}
+            <div className="flex items-center gap-4 pb-4 border-b border-[var(--border-subtle)]">
+              {/* Profile Photo Frame */}
+              <div className="relative group shrink-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[var(--accent-primary)]/50 bg-[var(--bg-surface-elevated)] shadow-md relative">
+                  <img
+                    src={photoSrc}
+                    alt="Demilew Terefe"
+                    onError={() => setPhotoSrc('/avatar.svg')}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-2xl pointer-events-none" />
+                </div>
+                {/* Active Status Badge */}
+                <span
+                  className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[var(--bg-surface)] shadow-xs"
+                  title="Available for projects & research"
+                />
+              </div>
+
+              {/* Identity & Verification */}
+              <div className="space-y-1 min-w-0">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-[var(--accent-subtle)] text-[var(--accent-primary)] font-semibold border border-[var(--accent-primary)]/20">
+                  <ShieldCheck className="w-3 h-3" />
+                  <span>{language === 'am' ? 'የተረጋገጠ መገለጫ' : 'Verified Identity'}</span>
+                </div>
+                <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)] tracking-tight truncate">
+                  {language === 'am' ? 'ደምለው ተረፈ' : t.hero.headline}
+                </h2>
+                <p className="text-xs text-[var(--text-secondary)] font-medium leading-snug">
+                  {headline}
+                </p>
+                <p className="text-[11px] text-[var(--text-tertiary)] flex items-center gap-1.5 pt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
+                  Addis Ababa, Ethiopia
+                </p>
+              </div>
             </div>
 
             {/* Key Verified Competencies */}

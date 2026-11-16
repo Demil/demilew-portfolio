@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="faceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="32" fill="url(#bgGrad)" />
+
+  <!-- Ambient circuit glow -->
+  <circle cx="100" cy="80" r="60" fill="url(#glow)" />
+  <circle cx="100" cy="80" r="50" fill="none" stroke="#38bdf8" stroke-opacity="0.15" stroke-dasharray="4 6" />
+
+  <!-- Stylized Executive / AI Researcher Silhouette -->
+  <!-- Shoulders / Jacket -->
+  <path d="M 40 190 C 40 148, 70 135, 100 135 C 130 135, 160 148, 160 190 Z" fill="url(#faceGrad)" stroke="#475569" stroke-width="1.5" />
+  
+  <!-- Collar / Shirt V -->
+  <polygon points="100,165 85,135 115,135" fill="#f8fafc" opacity="0.9" />
+  <polygon points="100,175 93,135 107,135" fill="#0284c7" />
+
+  <!-- Neck -->
+  <rect x="91" y="112" width="18" height="26" rx="4" fill="#64748b" />
+
+  <!-- Head / Face -->
+  <ellipse cx="100" cy="85" rx="32" ry="38" fill="#475569" />
+  
+  <!-- Modern Geometric Hair Silhouette -->
+  <path d="M 68 80 C 66 52, 85 45, 100 45 C 118 45, 134 52, 132 80 C 122 72, 114 74, 100 70 C 86 74, 76 72, 68 80 Z" fill="#0f172a" />
+
+  <!-- Monogram Initials Badge DT -->
+  <rect x="68" y="148" width="64" height="22" rx="11" fill="#090d16" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="100" y="163" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#38bdf8" text-anchor="middle" letter-spacing="2">DEMILEW</text>
+</svg>

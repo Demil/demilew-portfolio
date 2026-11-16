@@ -11,7 +11,6 @@ import {
   Brain,
   Server,
   Network,
-  ArrowRight,
 } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
@@ -212,28 +211,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           })}
         </div>
 
-        {/* Unified Collaboration Call-to-Action */}
-        <div className="mt-12 p-6 sm:p-8 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
-          <div className="space-y-1">
-            <h4 className="text-base sm:text-lg font-bold text-[var(--text-primary)] tracking-tight">
-              {language === 'am'
-                ? 'ለድርጅትዎ ወይም ለምርምር ቡድንዎ ተስማሚ መፍትሄ ይፈልጋሉ?'
-                : 'Need custom systems engineering, AI research advisory, or project control?'}
-            </h4>
-            <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
-              {language === 'am'
-                ? 'በቀጥታ መልእክት በመላክ ስለ ስራዎ ወሰን እና የጊዜ ሰሌዳ እንወያይ።'
-                : 'Initiate a direct inquiry to discuss technical scope, deliverables, and timelines.'}
-            </p>
-          </div>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--accent-primary)] text-[#090b10] text-xs font-semibold hover:opacity-95 transition-all shadow-sm shrink-0 interactive-btn"
-          >
-            <span>{t.nav.letsTalk}</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
+
       </div>
     </section>
   );
