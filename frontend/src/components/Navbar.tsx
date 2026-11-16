@@ -17,7 +17,6 @@ export default function Navbar() {
 
   const navLinks = [
     { name: t.nav.about, href: '/#about', id: 'about' },
-    { name: t.nav.services, href: '/#services', id: 'services' },
     { name: t.nav.projects, href: '/#projects', id: 'projects' },
     { name: t.nav.research, href: '/#research', id: 'research' },
     { name: t.nav.skills, href: '/#skills', id: 'skills' },
@@ -35,7 +34,7 @@ export default function Navbar() {
       }
 
       // 2. Active section ScrollSpy
-      const sections = ['about', 'services', 'projects', 'research', 'skills', 'experience', 'contact'];
+      const sections = ['about', 'projects', 'research', 'skills', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 160;
 
       for (let i = sections.length - 1; i >= 0; i--) {

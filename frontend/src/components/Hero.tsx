@@ -49,22 +49,22 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               </p>
             </div>
 
-            {/* Editorial Narrative: Three Strong Sentences Highlighting Core Professional Experience */}
+            {/* Editorial Narrative: Three Strong Sentences - Career Path, Focus Area & Impact */}
             <div className="space-y-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
               <p>
                 {language === 'am'
-                  ? 'በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ ውስጥ የፕሮጀክት ቁጥጥር ስራ አስኪያጅ (PCM) በመሆን መጠነ-ሰፊ የቴሌኮም ስራዎችን፣ የጊዜ ሰሌዳ ቁጥጥርን እና ወሳኝ ፕሮጀክቶችን በከፍተኛ የአሰራር ጥራት እመራለሁ።'
-                  : 'As Project Control Manager at Huawei Technologies Ethiopia, I orchestrate enterprise telecom operations, deliver milestone governance, and manage mission-critical deployments with strict SLA precision.'}
+                  ? 'የሙያ ጉዞዬ በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በሶፍትዌር ምህንድስና እና በሳይበር ደህንነት ምርምር ተጀምሮ፣ በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ መጠነ-ሰፊ የቴሌኮም ስራዎችን በፕሮጀክት ቁጥጥር ስራ አስኪያጅነት (PCM) ወደመምራት አድጓል።'
+                  : 'My career path evolved from software engineering and cybersecurity research at the Information Network Security Administration (INSA) to leading enterprise telecom deployments as Project Control Manager at Huawei Technologies Ethiopia.'}
               </p>
               <p>
                 {language === 'am'
-                  ? 'በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በዳታ ሳይንስ መሃንዲስነት የኔትወርክ ጥቃትን የሚከላከሉ እና ያልተለመዱ ሁኔታዎችን የሚለዩ የጥልቅ ትምህርት (Deep Learning) የደህንነት ስርዓቶችን ገንብቻለሁ።'
-                  : 'At the Information Network Security Administration (INSA), I engineered deep learning anomaly detection pipelines and advanced security models for high-stakes threat intelligence.'}
+                  ? 'ዋና የቴክኒክ እና የምርምር ትኩረቴ በኤአይ ደህንነት (AI Security)፣ አዳዲስ የኔትወርክ ጥቃቶችን መለየት (Zero-Day Intrusion Detection)፣ ግላዊነትን በሚጠብቅ ዲፕ ለርኒንግ እና በጠንካራ የ FastAPI ባክኤንድ ሲስተሞች ላይ ያተኮረ ነው።'
+                  : 'Today, my technical focus is centered on applied AI security, zero-day network intrusion detection architectures, privacy-preserving deep learning, and resilient FastAPI backend systems.'}
               </p>
               <p className="text-xs sm:text-sm text-[var(--text-tertiary)]">
                 {language === 'am'
-                  ? 'ይህንን የስራ አመራር ብቃት ከተግባራዊ የሲስተም አርክቴክቸር ጋር በማጣመር በ Python፣ FastAPI እና PostgreSQL ፈጣን፣ አስተማማኝ እና ተጨባጭ ውጤት የሚያስገኙ የኤአይ መፍትሄዎችን እገነባለሁ።'
-                  : 'I bridge enterprise delivery management with hands-on systems architecture, building production-ready FastAPI microservices and scalable AI solutions tailored for real-world impact.'}
+                  ? 'ጥብቅ የፕሮጀክት አመራር ልምዴን ከተግባራዊ ማሽን ለርኒንግ ምህንድስና ጋር በማጣመር ተጨባጭ ችግሮችን የሚፈቱ አስተማማኝ፣ ፈጣን እና ደህንነታቸው የተጠበቀ ዘመናዊ ሲስተሞችን እገነባለሁ።'
+                  : 'By pairing structured telecom delivery governance with advanced machine learning engineering, I build production-grade, reliable digital systems that solve critical real-world problems.'}
               </p>
             </div>
 

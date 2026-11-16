@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import ServicesSection from '@/components/ServicesSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ResearchSection from '@/components/ResearchSection';
 import SkillsSection from '@/components/SkillsSection';
@@ -40,7 +39,6 @@ export default async function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero profile={profile} settings={settings} cvInfo={cvInfo} />
-        <ServicesSection />
         <ProjectsSection projects={projects} />
         <ResearchSection research={research} />
         <SkillsSection skills={skills} />

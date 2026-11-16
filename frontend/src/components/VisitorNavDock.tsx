@@ -6,12 +6,11 @@ import { useLanguage } from '@/context/LanguageContext';
 
 const SECTIONS = [
   { id: 'about', labelEn: 'About', labelAm: 'ስለ እኔ', num: '01' },
-  { id: 'services', labelEn: 'Services', labelAm: 'አገልግሎቶች', num: '02' },
-  { id: 'projects', labelEn: 'Projects', labelAm: 'ፕሮጀክቶች', num: '03' },
-  { id: 'research', labelEn: 'Research', labelAm: 'ጥናቶች', num: '04' },
-  { id: 'skills', labelEn: 'Skills', labelAm: 'ክህሎቶች', num: '05' },
-  { id: 'experience', labelEn: 'Experience', labelAm: 'ልምድ', num: '06' },
-  { id: 'contact', labelEn: 'Contact', labelAm: 'አግኙኝ', num: '07' },
+  { id: 'projects', labelEn: 'Projects', labelAm: 'ፕሮጀክቶች', num: '02' },
+  { id: 'research', labelEn: 'Research', labelAm: 'ጥናቶች', num: '03' },
+  { id: 'skills', labelEn: 'Skills', labelAm: 'ክህሎቶች', num: '04' },
+  { id: 'experience', labelEn: 'Experience', labelAm: 'ልምድ', num: '05' },
+  { id: 'contact', labelEn: 'Contact', labelAm: 'አግኙኝ', num: '06' },
 ];
 
 export default function VisitorNavDock() {

@@ -30,9 +30,6 @@ export default function Footer() {
           <a href="/#about" className="hover:text-[var(--text-primary)] transition-colors py-1">
             {t.nav.about}
           </a>
-          <a href="/#services" className="hover:text-[var(--text-primary)] transition-colors py-1">
-            {t.nav.services}
-          </a>
           <a href="/#projects" className="hover:text-[var(--text-primary)] transition-colors py-1">
             {t.nav.projects}
           </a>
