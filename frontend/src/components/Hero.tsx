@@ -49,22 +49,22 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               </p>
             </div>
 
-            {/* Editorial Narrative: Three Strong Sentences - Career Path, Focus Area & Impact */}
-            <div className="space-y-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+            {/* Editorial Narrative: Three Short, Punchy Sentences */}
+            <div className="space-y-2.5 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
               <p>
                 {language === 'am'
-                  ? 'የሙያ ጉዞዬ በመረጃ መረብ ደህንነት አስተዳደር (ኢንሳ / INSA) በሶፍትዌር ምህንድስና እና በሳይበር ደህንነት ምርምር ተጀምሮ፣ በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ መጠነ-ሰፊ የቴሌኮም ስራዎችን በፕሮጀክት ቁጥጥር ስራ አስኪያጅነት (PCM) ወደመምራት አድጓል።'
-                  : 'My career path evolved from software engineering and cybersecurity research at the Information Network Security Administration (INSA) to leading enterprise telecom deployments as Project Control Manager at Huawei Technologies Ethiopia.'}
+                  ? 'ሙያዬ ከ INSA ሳይበር ደህንነት ምርምር ተጀምሮ፣ ዛሬ በሁዋዌ ቴክኖሎጂስ ኢትዮጵያ የፕሮጀክት ቁጥጥር ስራ አስኪያጅ (PCM) ሆኜ ትልልቅ የቴሌኮም ስራዎችን እመራለሁ።'
+                  : 'From cybersecurity research at INSA to leading enterprise telecom deployments as Project Control Manager at Huawei Technologies Ethiopia.'}
               </p>
               <p>
                 {language === 'am'
-                  ? 'ዋና የቴክኒክ እና የምርምር ትኩረቴ በኤአይ ደህንነት (AI Security)፣ አዳዲስ የኔትወርክ ጥቃቶችን መለየት (Zero-Day Intrusion Detection)፣ ግላዊነትን በሚጠብቅ ዲፕ ለርኒንግ እና በጠንካራ የ FastAPI ባክኤንድ ሲስተሞች ላይ ያተኮረ ነው።'
-                  : 'Today, my technical focus is centered on applied AI security, zero-day network intrusion detection architectures, privacy-preserving deep learning, and resilient FastAPI backend systems.'}
+                  ? 'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞችን መገንባት ነው።'
+                  : 'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.'}
               </p>
               <p className="text-xs sm:text-sm text-[var(--text-tertiary)]">
                 {language === 'am'
-                  ? 'ጥብቅ የፕሮጀክት አመራር ልምዴን ከተግባራዊ ማሽን ለርኒንግ ምህንድስና ጋር በማጣመር ተጨባጭ ችግሮችን የሚፈቱ አስተማማኝ፣ ፈጣን እና ደህንነታቸው የተጠበቀ ዘመናዊ ሲስተሞችን እገነባለሁ።'
-                  : 'By pairing structured telecom delivery governance with advanced machine learning engineering, I build production-grade, reliable digital systems that solve critical real-world problems.'}
+                  ? 'ጥብቅ የፕሮጀክት አስተዳደር ልምድ ከ FastAPI እና ማሽን ለርኒንግ ምህንድስና ጋር አጣምሬ አስተማማኝ፣ ወሳኝ ሲስተሞችን እሰራለሁ።'
+                  : 'I combine project governance with FastAPI and ML engineering to build reliable, impactful systems.'}
               </p>
             </div>
 
