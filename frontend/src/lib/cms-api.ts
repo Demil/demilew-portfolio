@@ -50,7 +50,17 @@ export interface ProfileData {
   email: string;
   cv_media_id?: number | null;
   profile_image_media_id?: number | null;
+  profile_image_url?: string | null;
   social_links: SocialLinkData[];
+}
+
+export interface PhotoMeta {
+  id: number;
+  filename: string;
+  file_size_bytes: number;
+  mime_type: string;
+  url: string;
+  uploaded_at: string;
 }
 
 export interface SocialLinkData {
@@ -108,6 +118,28 @@ export const cmsProfile = {
     return res.json();
   },
   deleteCv: () => request<void>('/profile/cv', { method: 'DELETE' }),
+
+  // Photo Operations
+  getPhoto: () => request<PhotoMeta>('/profile/photo/meta'),
+  uploadPhoto: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const csrf = getCsrfToken();
+    const headers: Record<string, string> = {};
+    if (csrf) headers['X-CSRF-Token'] = csrf;
+    const res = await fetch(`${API_BASE}/profile/photo/upload`, {
+      method: 'POST',
+      headers,
+      body: formData,
+      credentials: 'include',
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `Photo upload failed: ${res.status}`);
+    }
+    return res.json();
+  },
+  deletePhoto: () => request<void>('/profile/photo', { method: 'DELETE' }),
 };
 
 // ── Projects ─────────────────────────────────────────────────────────────────

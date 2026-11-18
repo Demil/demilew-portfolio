@@ -14,8 +14,9 @@ import {
   Download,
   ExternalLink,
   Loader2,
+  Camera,
 } from 'lucide-react';
-import { cmsProfile, ProfileData, SocialLinkData } from '@/lib/cms-api';
+import { cmsProfile, ProfileData, SocialLinkData, PhotoMeta } from '@/lib/cms-api';
 
 interface CvMeta {
   id: number;
@@ -29,9 +30,17 @@ interface CvMeta {
 export default function AdminProfilePage() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [cvMeta, setCvMeta] = useState<CvMeta | null>(null);
+  const [photoMeta, setPhotoMeta] = useState<PhotoMeta | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Profile Photo state
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [deletingPhoto, setDeletingPhoto] = useState(false);
+  const photoInputRef = useRef<HTMLInputElement | null>(null);
 
   // CV state
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -43,15 +52,17 @@ export default function AdminProfilePage() {
   const [newPlatform, setNewPlatform] = useState('');
   const [newUrl, setNewUrl] = useState('');
 
-  const loadProfileAndCv = async () => {
+  const loadProfileAndData = async () => {
     try {
       setLoading(true);
-      const [profileData, cvData] = await Promise.all([
+      const [profileData, cvData, photoData] = await Promise.all([
         cmsProfile.getAdmin(),
         cmsProfile.getCv().catch(() => null),
+        cmsProfile.getPhoto().catch(() => null),
       ]);
       setProfile(profileData);
       setCvMeta(cvData);
+      setPhotoMeta(photoData);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMsg({ type: 'error', text: err.message });
@@ -62,8 +73,73 @@ export default function AdminProfilePage() {
   };
 
   useEffect(() => {
-    loadProfileAndCv();
+    loadProfileAndData();
   }, []);
+
+  const handlePhotoFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setMsg({ type: 'error', text: 'Please select a valid image file (JPG, PNG, WebP, GIF, or SVG).' });
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setMsg({ type: 'error', text: 'Image file size must be less than 5 MB.' });
+      return;
+    }
+    setPhotoFile(file);
+    setPhotoPreview(URL.createObjectURL(file));
+    setMsg(null);
+  };
+
+  const handleUploadPhoto = async () => {
+    if (!photoFile) return;
+    setUploadingPhoto(true);
+    setMsg(null);
+    try {
+      await cmsProfile.uploadPhoto(photoFile);
+      setPhotoFile(null);
+      setPhotoPreview(null);
+      if (photoInputRef.current) photoInputRef.current.value = '';
+      setMsg({ type: 'success', text: 'Profile photo uploaded and published successfully!' });
+      const [refreshedProfile, refreshedPhoto] = await Promise.all([
+        cmsProfile.getAdmin(),
+        cmsProfile.getPhoto().catch(() => null),
+      ]);
+      setProfile(refreshedProfile);
+      setPhotoMeta(refreshedPhoto);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setMsg({ type: 'error', text: err.message });
+      }
+    } finally {
+      setUploadingPhoto(false);
+    }
+  };
+
+  const handleDeletePhoto = async () => {
+    if (!confirm('Are you sure you want to remove the current profile photo? The site will fallback to the default avatar.')) {
+      return;
+    }
+    setDeletingPhoto(true);
+    setMsg(null);
+    try {
+      await cmsProfile.deletePhoto();
+      setPhotoMeta(null);
+      setPhotoFile(null);
+      setPhotoPreview(null);
+      if (photoInputRef.current) photoInputRef.current.value = '';
+      setMsg({ type: 'success', text: 'Profile photo removed successfully. Default avatar active.' });
+      const refreshedProfile = await cmsProfile.getAdmin();
+      setProfile(refreshedProfile);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setMsg({ type: 'error', text: err.message });
+      }
+    } finally {
+      setDeletingPhoto(false);
+    }
+  };
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,7 +227,7 @@ export default function AdminProfilePage() {
       });
       setNewPlatform('');
       setNewUrl('');
-      loadProfileAndCv();
+      loadProfileAndData();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMsg({ type: 'error', text: err.message });
@@ -162,7 +238,7 @@ export default function AdminProfilePage() {
   const handleToggleVisibility = async (link: SocialLinkData) => {
     try {
       await cmsProfile.updateSocialLink(link.id, { is_visible: !link.is_visible });
-      loadProfileAndCv();
+      loadProfileAndData();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMsg({ type: 'error', text: err.message });
@@ -174,7 +250,7 @@ export default function AdminProfilePage() {
     if (!confirm('Remove this social link?')) return;
     try {
       await cmsProfile.deleteSocialLink(id);
-      loadProfileAndCv();
+      loadProfileAndData();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMsg({ type: 'error', text: err.message });
@@ -212,6 +288,112 @@ export default function AdminProfilePage() {
           <span>{msg.text}</span>
         </div>
       )}
+
+      {/* ── Professional Profile Photo Management Card ───────────────────── */}
+      <div className="p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-5">
+        <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-lg bg-[var(--bg-base)] border border-[var(--border-subtle)] text-[var(--accent-primary)]">
+              <Camera className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">Professional Profile Photo</h2>
+              <p className="text-xs text-[var(--text-secondary)]">
+                Upload or change your executive portrait displayed on the About Me / Hero section.
+              </p>
+            </div>
+          </div>
+          {photoMeta ? (
+            <span className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              Active Photo Published
+            </span>
+          ) : (
+            <span className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              Default Avatar Active
+            </span>
+          )}
+        </div>
+
+        {/* Photo Display & Upload Interface */}
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+          {/* Avatar Preview */}
+          <div className="sm:col-span-4 flex flex-col items-center sm:items-start gap-2">
+            <div className="relative group w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-[var(--accent-primary)]/50 bg-[var(--bg-base)] shadow-md">
+              <img
+                src={photoPreview || (photoMeta ? `${apiBase}/profile/photo` : '/avatar.svg')}
+                alt="Profile Preview"
+                className="w-full h-full object-cover object-top"
+              />
+              {photoPreview && (
+                <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-600 text-white shadow">
+                  Preview
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-[var(--text-tertiary)] font-mono text-center sm:text-left">
+              {photoPreview ? 'Ready to upload' : photoMeta ? photoMeta.filename : 'Default vector avatar'}
+            </p>
+          </div>
+
+          {/* Controls & Guidance */}
+          <div className="sm:col-span-8 space-y-4">
+            <div className="space-y-1 text-xs text-[var(--text-secondary)]">
+              <p className="font-medium text-[var(--text-primary)]">Image Guidelines:</p>
+              <ul className="list-disc list-inside space-y-0.5 text-[11px] text-[var(--text-tertiary)]">
+                <li>Professional square or portrait aspect ratio (1:1 recommended)</li>
+                <li>Recommended minimum size: 400 × 400 px (maximum 5 MB)</li>
+                <li>Supported formats: JPG, PNG, WebP, GIF, SVG</li>
+              </ul>
+            </div>
+
+            {/* Upload Controls */}
+            <div className="space-y-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <input
+                  ref={photoInputRef}
+                  type="file"
+                  accept="image/*,.jpg,.jpeg,.png,.webp,.gif,.svg"
+                  onChange={handlePhotoFileChange}
+                  className="text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border file:border-[var(--border-subtle)] file:bg-[var(--bg-base)] file:text-[var(--text-primary)] file:text-xs file:font-medium hover:file:border-[var(--border-prominent)] cursor-pointer"
+                />
+                <button
+                  type="button"
+                  onClick={handleUploadPhoto}
+                  disabled={!photoFile || uploadingPhoto}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-primary)] hover:opacity-90 text-[#090b10] font-semibold text-xs disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm shrink-0"
+                >
+                  {uploadingPhoto ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
+                  <span>{uploadingPhoto ? 'Uploading...' : photoMeta ? 'Update Photo' : 'Publish Photo'}</span>
+                </button>
+              </div>
+
+              {photoMeta && (
+                <div className="flex items-center gap-3 pt-1">
+                  <a
+                    href={`${apiBase}/profile/photo`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
+                    <span>View full size</span>
+                  </a>
+                  <span className="text-[var(--border-subtle)]">|</span>
+                  <button
+                    type="button"
+                    onClick={handleDeletePhoto}
+                    disabled={deletingPhoto}
+                    className="inline-flex items-center gap-1 text-xs text-rose-400 hover:text-rose-300 font-medium transition-colors disabled:opacity-50"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>{deletingPhoto ? 'Removing...' : 'Remove Photo'}</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ── Curriculum Vitae (CV) Management Card ────────────────────────── */}
       <div className="p-6 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-5">

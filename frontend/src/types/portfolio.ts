@@ -15,6 +15,7 @@ export interface Profile {
   email: string;
   cv_media_id?: number | null;
   profile_image_media_id?: number | null;
+  profile_image_url?: string | null;
   social_links: SocialLink[];
 }
 

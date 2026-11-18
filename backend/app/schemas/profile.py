@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, computed_field
 
 
 class SocialLinkBase(BaseModel):
@@ -58,6 +58,13 @@ class ProfileRead(ProfileBase):
     social_links: list[SocialLinkRead] = []
     created_at: datetime
     updated_at: datetime
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def profile_image_url(self) -> str | None:
+        if self.profile_image_media_id:
+            return "/api/v1/profile/photo"
+        return None
 
     model_config = ConfigDict(from_attributes=True)
 

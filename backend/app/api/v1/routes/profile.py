@@ -138,3 +138,55 @@ async def upload_cv(
 def delete_cv(db: Session = Depends(get_db)) -> None:
     ProfileService(db).delete_cv(db)
 
+
+# ── Profile Photo Upload & Access ─────────────────────────────────────────────
+
+@router.get(
+    "/photo",
+    summary="Stream or download the active owner profile photo",
+)
+def get_profile_photo(db: Session = Depends(get_db)) -> Response:
+    """Public endpoint: streams profile image inline."""
+    content, mime_type, filename = ProfileService(db).download_profile_image(db)
+    return Response(
+        content=content,
+        media_type=mime_type,
+        headers={
+            "Content-Disposition": f'inline; filename="{filename}"',
+            "Cache-Control": "public, max-age=3600",
+        },
+    )
+
+
+@router.get(
+    "/photo/meta",
+    summary="Get profile photo metadata (media id, filename, url) if a photo is uploaded",
+)
+def get_profile_photo_meta(db: Session = Depends(get_db)) -> dict:
+    """Return profile photo media metadata."""
+    return ProfileService(db).get_profile_image_info(db)
+
+
+@router.post(
+    "/photo/upload",
+    response_model=MediaRead,
+    status_code=status.HTTP_201_CREATED,
+    summary="Upload or replace the owner profile photo. Admin-protected.",
+    dependencies=[Depends(require_admin)],
+)
+async def upload_profile_photo(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+) -> MediaRead:
+    return await ProfileService(db).upload_profile_image(file, db)
+
+
+@router.delete(
+    "/photo",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Remove the profile photo and unlink from profile. Admin-protected.",
+    dependencies=[Depends(require_admin)],
+)
+def delete_profile_photo(db: Session = Depends(get_db)) -> None:
+    ProfileService(db).delete_profile_image(db)
+

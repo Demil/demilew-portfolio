@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CvInfo, Profile, PublicSettings } from '@/types/portfolio';
 import { ArrowDown, Mail, Award, Briefcase, Cpu, ShieldCheck, FileText, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons';
@@ -15,7 +15,31 @@ interface HeroProps {
 
 export default function Hero({ profile, settings, cvInfo }: HeroProps) {
   const { t, language } = useLanguage();
-  const [photoSrc, setPhotoSrc] = useState('/profile.jpg');
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
+
+  // Compute active photo source:
+  // 1. profile_image_url from server if available
+  // 2. /api/v1/profile/photo if profile_image_media_id is present
+  // 3. /profile.jpg if placed in public/
+  // 4. /avatar.svg as polished fallback
+  const getInitialPhoto = () => {
+    if (profile?.profile_image_url) {
+      return profile.profile_image_url.startsWith('http')
+        ? profile.profile_image_url
+        : `${apiBase.replace(/\/api\/v1\/?$/, '')}${profile.profile_image_url}`;
+    }
+    if (profile?.profile_image_media_id) {
+      return `${apiBase}/profile/photo`;
+    }
+    return '/profile.jpg';
+  };
+
+  const [photoSrc, setPhotoSrc] = useState(getInitialPhoto);
+
+  useEffect(() => {
+    setPhotoSrc(getInitialPhoto());
+  }, [profile?.profile_image_url, profile?.profile_image_media_id, apiBase]);
+
   const activeCv = cvInfo || DEFAULT_CV_INFO;
 
   const availability =
@@ -119,9 +143,14 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
               <div className="relative group shrink-0">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[var(--accent-primary)]/50 bg-[var(--bg-surface-elevated)] shadow-md relative">
                   <img
+                    key={photoSrc}
                     src={photoSrc}
                     alt="Demilew Terefe"
-                    onError={() => setPhotoSrc('/avatar.svg')}
+                    onError={() => {
+                      if (photoSrc !== '/avatar.svg') {
+                        setPhotoSrc('/avatar.svg');
+                      }
+                    }}
                     className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-black/10 dark:ring-white/10 rounded-2xl pointer-events-none" />
