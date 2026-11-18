@@ -25,7 +25,7 @@ from app.services.admin_auth import AdminAuthService
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 COOKIE_SECURE = settings.APP_ENV == "production"
-COOKIE_SAMESITE = "lax"
+COOKIE_SAMESITE = "none" if COOKIE_SECURE else "lax"
 ACCESS_TOKEN_MAX_AGE = settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60
 REFRESH_TOKEN_MAX_AGE = settings.REFRESH_TOKEN_EXPIRE_DAYS * 86400
 

@@ -251,10 +251,11 @@ def seed_database(db: Session) -> None:
 
     # 7. Site Settings
     settings_data = [
-        ("site_title", "Demilew Terefe — AI & Backend Software Engineer", "Browser title"),
+        ("site_title", "Demilew Terefe — AI Developer & Machine Learning Engineer", "Browser title"),
         ("site_tagline", "Specializing in applied machine learning, AI security, and resilient backend systems.", "Hero headline"),
-        ("meta_description", "Personal portfolio and research platform of Demilew Terefe, AI and Backend Software Engineer.", "SEO description"),
-        ("contact_email", "contact@demilewterefe.com", "Public contact address"),
+        ("meta_description", "Personal portfolio and research platform of Demilew Terefe, AI Developer and Machine Learning Engineer.", "SEO description"),
+        ("site_url", "https://www.demilew.com", "Primary canonical domain"),
+        ("contact_email", "demilew05terefe@gmail.com", "Public contact address"),
         ("availability_status", "Available for select software engineering opportunities & research collaborations", "Status banner"),
     ]
     for key, val, desc in settings_data:

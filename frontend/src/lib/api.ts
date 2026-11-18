@@ -92,7 +92,7 @@ export async function getResearch(): Promise<Research[]> {
 
 export async function getPublicSettings(): Promise<PublicSettings> {
   return safeFetch<PublicSettings>('/settings/public', {
-    site_title: 'Demilew Terefe — AI & Backend Software Engineer',
+    site_title: 'Demilew Terefe — AI Developer & Machine Learning Engineer',
     site_tagline: 'Specializing in applied machine learning, AI security, and resilient backend systems.',
     availability_status: 'Available for select software engineering opportunities & research collaborations',
     contact_email: 'contact@demilewterefe.com',

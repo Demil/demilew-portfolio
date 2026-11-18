@@ -3,9 +3,21 @@ import './globals.css';
 import { Providers } from '@/components/Providers';
 
 export const metadata: Metadata = {
-  title: 'Demilew Terefe | AI Developer & Researcher',
+  metadataBase: new URL('https://www.demilew.com'),
+  title: 'Demilew Terefe | AI Developer & Machine Learning Engineer',
   description:
-    'Portfolio and research of Demilew Terefe — AI Developer and Researcher specializing in Python, FastAPI, PyTorch, AI Security, and modern backend systems.',
+    'Portfolio and research of Demilew Terefe — AI Developer and Machine Learning Engineer specializing in Python, FastAPI, PyTorch, AI Security, and modern backend systems.',
+  alternates: {
+    canonical: 'https://www.demilew.com',
+  },
+  openGraph: {
+    title: 'Demilew Terefe | AI Developer & Machine Learning Engineer',
+    description:
+      'Portfolio and research of Demilew Terefe — AI Developer and Machine Learning Engineer.',
+    url: 'https://www.demilew.com',
+    siteName: 'Demilew Terefe Portfolio',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

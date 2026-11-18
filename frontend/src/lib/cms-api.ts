@@ -1,4 +1,4 @@
-import { getCsrfToken } from '@/lib/auth';
+import { getCsrfToken, getStoredToken } from '@/lib/auth';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
@@ -10,6 +10,12 @@ async function request<T>(
   
   if (!headers.has('Content-Type') && !(options.body instanceof FormData)) {
     headers.set('Content-Type', 'application/json');
+  }
+
+  // Attach Bearer token if admin is authenticated (guarantees cross-origin auth)
+  const token = getStoredToken();
+  if (token && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${token}`);
   }
 
   // Attach CSRF token for state-changing methods
@@ -103,7 +109,9 @@ export const cmsProfile = {
     const formData = new FormData();
     formData.append('file', file);
     const csrf = getCsrfToken();
+    const token = getStoredToken();
     const headers: Record<string, string> = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
     if (csrf) headers['X-CSRF-Token'] = csrf;
     const res = await fetch(`${API_BASE}/profile/cv/upload`, {
       method: 'POST',
@@ -125,7 +133,9 @@ export const cmsProfile = {
     const formData = new FormData();
     formData.append('file', file);
     const csrf = getCsrfToken();
+    const token = getStoredToken();
     const headers: Record<string, string> = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
     if (csrf) headers['X-CSRF-Token'] = csrf;
     const res = await fetch(`${API_BASE}/profile/photo/upload`, {
       method: 'POST',
