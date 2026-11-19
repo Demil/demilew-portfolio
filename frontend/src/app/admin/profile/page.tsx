@@ -320,7 +320,7 @@ export default function AdminProfilePage() {
           <div className="sm:col-span-4 flex flex-col items-center sm:items-start gap-2">
             <div className="relative group w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-[var(--accent-primary)]/50 bg-[var(--bg-base)] shadow-md">
               <img
-                src={photoPreview || (photoMeta ? `${apiBase}/profile/photo` : '/avatar.svg')}
+                src={photoPreview || (photoMeta ? `${apiBase}/profile/photo?t=${new Date(photoMeta.uploaded_at).getTime()}` : '/avatar.svg')}
                 alt="Profile Preview"
                 className="w-full h-full object-cover object-top"
               />

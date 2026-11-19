@@ -26,7 +26,7 @@ const API_BASE_URL =
 async function safeFetch<T>(endpoint: string, fallback: T): Promise<T> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {
       signal: controller.signal,
@@ -58,7 +58,7 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1500);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(`${API_BASE_URL}/projects/${slug}`, {
       signal: controller.signal,

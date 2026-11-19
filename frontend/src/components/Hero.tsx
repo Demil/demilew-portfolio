@@ -18,10 +18,9 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
   const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
   // Compute active photo source:
-  // 1. profile_image_url from server if available
+  // 1. profile_image_url from server if available (with media version)
   // 2. /api/v1/profile/photo if profile_image_media_id is present
-  // 3. /profile.jpg if placed in public/
-  // 4. /avatar.svg as polished fallback
+  // 3. /avatar.svg as polished instant fallback (avoids broken image 404s)
   const getInitialPhoto = () => {
     if (profile?.profile_image_url) {
       return profile.profile_image_url.startsWith('http')
@@ -29,15 +28,34 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
         : `${apiBase.replace(/\/api\/v1\/?$/, '')}${profile.profile_image_url}`;
     }
     if (profile?.profile_image_media_id) {
-      return `${apiBase}/profile/photo`;
+      return `${apiBase}/profile/photo?v=${profile.profile_image_media_id}`;
     }
-    return '/profile.jpg';
+    return '/avatar.svg';
   };
 
   const [photoSrc, setPhotoSrc] = useState(getInitialPhoto);
 
   useEffect(() => {
+    // 1. Set from props if available
     setPhotoSrc(getInitialPhoto());
+
+    // 2. Client-side live sync: query metadata to guarantee latest photo and bust browser cache
+    fetch(`${apiBase}/profile/photo/meta`, { cache: 'no-store' })
+      .then((res) => {
+        if (res.ok) return res.json();
+        return null;
+      })
+      .then((meta) => {
+        if (meta && meta.url) {
+          const timestamp = meta.uploaded_at ? new Date(meta.uploaded_at).getTime() : Date.now();
+          setPhotoSrc(`${apiBase}/profile/photo?t=${timestamp}`);
+        } else {
+          setPhotoSrc('/avatar.svg');
+        }
+      })
+      .catch(() => {
+        // Fallback maintained gracefully
+      });
   }, [profile?.profile_image_url, profile?.profile_image_media_id, apiBase]);
 
   const activeCv = cvInfo || DEFAULT_CV_INFO;

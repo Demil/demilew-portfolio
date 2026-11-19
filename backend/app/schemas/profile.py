@@ -63,7 +63,7 @@ class ProfileRead(ProfileBase):
     @property
     def profile_image_url(self) -> str | None:
         if self.profile_image_media_id:
-            return "/api/v1/profile/photo"
+            return f"/api/v1/profile/photo?v={self.profile_image_media_id}"
         return None
 
     model_config = ConfigDict(from_attributes=True)

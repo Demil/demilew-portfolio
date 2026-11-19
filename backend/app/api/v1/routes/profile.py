@@ -153,7 +153,7 @@ def get_profile_photo(db: Session = Depends(get_db)) -> Response:
         media_type=mime_type,
         headers={
             "Content-Disposition": f'inline; filename="{filename}"',
-            "Cache-Control": "public, max-age=3600",
+            "Cache-Control": "no-cache, must-revalidate",
         },
     )
 

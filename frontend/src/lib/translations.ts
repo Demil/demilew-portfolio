@@ -134,8 +134,8 @@ export const translations: Record<Language, Translations> = {
       engagementLabel: 'Ways We Can Work Together',
     },
     projects: {
-      eyebrow: 'Portfolio',
-      heading: 'Featured Projects',
+      eyebrow: 'Projects & Publications',
+      heading: 'My Projects and Publications',
       subtitle:
         'Real-world systems built for cybersecurity, machine learning, and intelligent document search.',
       viewCaseStudy: 'View Project',
@@ -154,7 +154,7 @@ export const translations: Record<Language, Translations> = {
     },
     research: {
       eyebrow: 'Publications',
-      heading: 'Research Area',
+      heading: 'My Research Area',
       subtitle:
         'Research focused on intrusion detection, deepfake defense, and local language AI models.',
       methodology: 'Methodology & Datasets',
@@ -235,8 +235,8 @@ export const translations: Record<Language, Translations> = {
       engagementLabel: 'የአሰራር መንገዶች',
     },
     projects: {
-      eyebrow: 'የተመረጡ ሥራዎች',
-      heading: 'የተመረጡ ፕሮጀክቶች',
+      eyebrow: 'ፕሮጀክቶች እና ህትመቶች',
+      heading: 'የእኔ ፕሮጀክቶች እና ህትመቶች',
       subtitle:
         'ለሳይበር ደህንነት፣ ለማሽን ለርኒንግ እና ለመረጃ ፍለጋ የተሰሩ እውነተኛ ሲስተሞች።',
       viewCaseStudy: 'ዝርዝሩን ይመልከቱ',
@@ -255,7 +255,7 @@ export const translations: Record<Language, Translations> = {
     },
     research: {
       eyebrow: 'ምርምር እና ጽሑፎች',
-      heading: 'የምርምር ሥራዎች',
+      heading: 'የእኔ የምርምር መስክ',
       subtitle:
         'በጥቃት መከላከል፣ በዲፕፌክ ምርመራ እና በሀገር ውስጥ ቋንቋዎች ኤአይ ላይ ያተኮሩ ጥናቶች።',
       methodology: 'የስራ ዘዴ እና ዳታሴቶች',
