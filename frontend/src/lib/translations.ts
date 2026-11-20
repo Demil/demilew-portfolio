@@ -114,7 +114,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'Demilew Terefe',
       highDistinction: 'Bahir Dar University (CGPA 3.84/4.00)',
       narrative:
-        'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.',
+        'I am passionate about artificial intelligence, software development, and IT project management. I enjoy exploring new AI models, customizing and integrating large language models (LLMs), experimenting with innovative technologies.',
       downloadCv: 'Download CV',
       viewCv: 'View CV',
       cvNotUploaded: 'CV not yet available',
@@ -134,8 +134,8 @@ export const translations: Record<Language, Translations> = {
       engagementLabel: 'Ways We Can Work Together',
     },
     projects: {
-      eyebrow: 'Projects & Publications',
-      heading: 'My Projects and Publications',
+      eyebrow: 'Projects',
+      heading: 'My Projects',
       subtitle:
         'Real-world systems built for cybersecurity, machine learning, and intelligent document search.',
       viewCaseStudy: 'View Project',
@@ -215,7 +215,7 @@ export const translations: Record<Language, Translations> = {
       headline: 'ደምለው ተረፈ',
       highDistinction: 'ከባህር ዳር ዩኒቨርሲቲ (CGPA 3.84/4.00)',
       narrative:
-        'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞች ላይ ነው።',
+        'በአርቴፊሻል ኢንተለጀንስ (ሰው ሰራሽ አስተውሎት)፣ በሶፍትዌር ልማት እና በአይቲ ፕሮጀክት ማኔጅመንት (አስተዳደር) ላይ ከፍተኛ ፍላጎት አለኝ። አዳዲስ የAI ሞዴሎችን መመርመር፣ ግዙፍ የቋንቋ ሞዴሎችን (LLMs) እንደፍላጎት ማስተካከልና ማቀናጀት እንዲሁም አዳዲስ ቴክኖሎጂዎችን መሞከር ያስደስተኛል።',
       downloadCv: 'CV ያውርዱ',
       viewCv: 'CV ይመልከቱ',
       cvNotUploaded: 'CV እስካሁን አልተጫነም',
@@ -235,8 +235,8 @@ export const translations: Record<Language, Translations> = {
       engagementLabel: 'የአሰራር መንገዶች',
     },
     projects: {
-      eyebrow: 'ፕሮጀክቶች እና ህትመቶች',
-      heading: 'የእኔ ፕሮጀክቶች እና ህትመቶች',
+      eyebrow: 'ፕሮጀክቶች',
+      heading: 'የእኔ ፕሮጀክቶች',
       subtitle:
         'ለሳይበር ደህንነት፣ ለማሽን ለርኒንግ እና ለመረጃ ፍለጋ የተሰሩ እውነተኛ ሲስተሞች።',
       viewCaseStudy: 'ዝርዝሩን ይመልከቱ',
