@@ -61,7 +61,7 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
   const activeCv = cvInfo || DEFAULT_CV_INFO;
 
   const availability =
-    settings?.availability_status || 'Available for projects • Call +251932045612 / +251953229831';
+    settings?.availability_status || 'Call +251932045612 / +251953229831';
 
   const headline =
     language === 'am'
@@ -95,8 +95,8 @@ export default function Hero({ profile, settings, cvInfo }: HeroProps) {
             {/* Editorial Narrative: Ultra-Crisp Single Focus Statement */}
             <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
               {language === 'am'
-                ? 'ትኩረቴ የኤአይ ደህንነት፣ አዳዲስ የጥቃት ምርመራ (Zero-Day Detection) እና ተጨባጭ ዲፕ ለርኒንግ ሲስተሞች ላይ ነው።'
-                : 'My focus: AI security, zero-day intrusion detection, and privacy-preserving deep learning systems.'}
+                ? 'በአርቴፊሻል ኢንተለጀንስ (ሰው ሰራሽ አስተውሎት)፣ በሶፍትዌር ልማት እና በአይቲ ፕሮጀክት ማኔጅመንት (አስተዳደር) ላይ ከፍተኛ ፍላጎት አለኝ። አዳዲስ የAI ሞዴሎችን መመርመር፣ ግዙፍ የቋንቋ ሞዴሎችን (LLMs) እንደፍላጎት ማስተካከልና ማቀናጀት እንዲሁም አዳዲስ ቴክኖሎጂዎችን መሞከር ያስደስተኛል።'
+                : 'I am passionate about artificial intelligence, software development, and IT project management. I enjoy exploring new AI models, customizing and integrating large language models (LLMs), experimenting with innovative technologies.'}
             </p>
 
             {/* Action Triggers: 2 Clear, Uncluttered Actions */}

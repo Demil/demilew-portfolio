@@ -10,7 +10,7 @@ import {
 export const INITIAL_PROFILE: Profile = {
   id: 1,
   full_name: 'Demilew Terefe',
-  headline: 'AI & Backend Software Engineer | Applied Machine Learning & Systems',
+  headline: 'AI Developer & Researcher | Machine Learning Engineer',
   biography:
     'Software Engineer and Applied AI Researcher with a strong focus on distributed backend architectures, machine learning security, and privacy-preserving AI. Graduated with a Bachelor of Science in Software Engineering from Bahir Dar University with high distinction (CGPA 3.84/4.00). Extensive industry experience in telecom infrastructure project control at Huawei Technologies and data science engineering at the Information Network Security Administration (INSA).',
   location: 'Addis Ababa, Ethiopia',
