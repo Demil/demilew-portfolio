@@ -24,6 +24,7 @@ class Project(TimestampMixin, Base):
     
     github_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     live_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    demo_video_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     image_media_id: Mapped[int | None] = mapped_column(
         ForeignKey("media.id", ondelete="SET NULL"), nullable=True
     )

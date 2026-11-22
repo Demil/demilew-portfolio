@@ -15,6 +15,7 @@ class ProjectBase(BaseModel):
     tech_stack: list[str] = Field(default_factory=list)
     github_url: str | None = Field(default=None, max_length=500)
     live_url: str | None = Field(default=None, max_length=500)
+    demo_video_url: str | None = Field(default=None, max_length=500)
     image_media_id: int | None = None
     featured: bool = False
     display_order: int = Field(default=0, ge=0)
@@ -46,6 +47,7 @@ class ProjectUpdate(BaseModel):
     tech_stack: list[str] | None = None
     github_url: str | None = Field(default=None, max_length=500)
     live_url: str | None = Field(default=None, max_length=500)
+    demo_video_url: str | None = Field(default=None, max_length=500)
     image_media_id: int | None = None
     featured: bool | None = None
     display_order: int | None = Field(default=None, ge=0)

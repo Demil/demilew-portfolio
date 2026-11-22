@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Project } from '@/types/portfolio';
@@ -7,9 +8,12 @@ import {
   ArrowUpRight,
   FolderGit2,
   CheckCircle2,
+  Play,
+  ExternalLink,
 } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useLanguage } from '@/context/LanguageContext';
+import DemoVideoModal from '@/components/DemoVideoModal';
 
 interface ProjectsSectionProps {
   projects: Project[];
@@ -17,6 +21,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const { t, language } = useLanguage();
+  const [selectedVideoProject, setSelectedVideoProject] = useState<Project | null>(null);
 
   if (!projects || projects.length === 0) return null;
 
@@ -100,14 +105,38 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                       </div>
 
                       {/* Action Links */}
-                      <div className="pt-2 flex items-center gap-2.5">
+                      <div className="pt-2 flex flex-wrap items-center gap-2">
+                        {/* Primary: Watch Demo button if demo_video_url exists, otherwise view case study */}
+                        <button
+                          type="button"
+                          onClick={() => setSelectedVideoProject(project)}
+                          className="group inline-flex items-center justify-center gap-1.5 text-xs font-mono font-semibold px-3.5 py-2 min-h-[40px] rounded-lg bg-[var(--accent-primary)] text-[#090b10] hover:brightness-110 transition-all shadow-xs interactive-btn active:scale-95 cursor-pointer"
+                          title={t.projects.watchDemo}
+                        >
+                          <Play className="w-3.5 h-3.5 fill-current shrink-0" />
+                          <span>{t.projects.watchDemo}</span>
+                        </button>
+
                         <Link
                           href={`/projects/${project.slug}`}
-                          className="group inline-flex items-center justify-center gap-1.5 text-xs font-mono font-semibold px-4 py-2 min-h-[40px] rounded-lg bg-[var(--bg-surface-elevated)] hover:bg-[var(--accent-primary)] text-[var(--accent-primary)] hover:text-[#090b10] border border-[var(--border-prominent)] hover:border-[var(--accent-primary)] transition-all shadow-xs interactive-btn active:scale-95"
+                          className="group inline-flex items-center justify-center gap-1.5 text-xs font-mono font-semibold px-3.5 py-2 min-h-[40px] rounded-lg bg-[var(--bg-surface-elevated)] hover:bg-[var(--accent-subtle)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] border border-[var(--border-prominent)] hover:border-[var(--accent-primary)] transition-all shadow-xs interactive-btn active:scale-95"
                         >
                           <span>{t.projects.viewCaseStudy}</span>
                           <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </Link>
+
+                        {project.live_url && (
+                          <a
+                            href={project.live_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[var(--text-tertiary)] hover:text-[var(--accent-primary)] transition-colors p-2 min-h-[40px] min-w-[40px] flex items-center justify-center rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/40 interactive-btn active:scale-95"
+                            title={t.projects.liveDemo}
+                            aria-label={t.projects.liveDemo}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
 
                         {project.github_url && (
                           <a
@@ -153,7 +182,16 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           })}
         </div>
 
-
+        {/* Interactive Demo Video Modal */}
+        <DemoVideoModal
+          isOpen={!!selectedVideoProject}
+          onClose={() => setSelectedVideoProject(null)}
+          title={selectedVideoProject?.title || ''}
+          videoUrl={selectedVideoProject?.demo_video_url}
+          liveUrl={selectedVideoProject?.live_url}
+          githubUrl={selectedVideoProject?.github_url}
+          techStack={selectedVideoProject?.tech_stack}
+        />
       </div>
     </section>
   );

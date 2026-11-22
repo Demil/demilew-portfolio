@@ -164,6 +164,7 @@ export interface ProjectData {
   tech_stack: string[];
   github_url?: string | null;
   live_url?: string | null;
+  demo_video_url?: string | null;
   featured: boolean;
   display_order: number;
   status: 'draft' | 'published' | 'archived';

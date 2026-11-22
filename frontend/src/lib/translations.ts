@@ -42,6 +42,7 @@ export interface Translations {
     viewCaseStudy: string;
     sourceCode: string;
     liveDemo: string;
+    watchDemo: string;
     problem: string;
     approach: string;
     stack: string;
@@ -141,6 +142,7 @@ export const translations: Record<Language, Translations> = {
       viewCaseStudy: 'View Project',
       sourceCode: 'Source Code',
       liveDemo: 'Live Demo',
+      watchDemo: 'Watch Demo',
       problem: 'The Challenge',
       approach: 'How It Was Built',
       stack: 'Technologies Used',
@@ -242,6 +244,7 @@ export const translations: Record<Language, Translations> = {
       viewCaseStudy: 'ዝርዝሩን ይመልከቱ',
       sourceCode: 'የኮድ ምንጭ',
       liveDemo: 'ቀጥታ ማሳያ',
+      watchDemo: 'የማሳያ ቪዲዮ',
       problem: 'ያጋጠመው ፈተና',
       approach: 'የተሰራበት መንገድ',
       stack: 'ያገለገሉ ቴክኖሎጂዎች',

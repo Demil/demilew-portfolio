@@ -35,6 +35,7 @@ export default function AdminProjectsPage() {
   const [techStackInput, setTechStackInput] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
+  const [demoVideoUrl, setDemoVideoUrl] = useState('');
   const [featured, setFeatured] = useState(false);
   const [displayOrder, setDisplayOrder] = useState(0);
   const [status, setStatus] = useState<'draft' | 'published' | 'archived'>('draft');
@@ -67,6 +68,7 @@ export default function AdminProjectsPage() {
     setTechStackInput('');
     setGithubUrl('');
     setLiveUrl('');
+    setDemoVideoUrl('');
     setFeatured(false);
     setDisplayOrder(projects.length);
     setStatus('draft');
@@ -84,6 +86,7 @@ export default function AdminProjectsPage() {
     setTechStackInput((p.tech_stack || []).join(', '));
     setGithubUrl(p.github_url || '');
     setLiveUrl(p.live_url || '');
+    setDemoVideoUrl(p.demo_video_url || '');
     setFeatured(p.featured);
     setDisplayOrder(p.display_order);
     setStatus(p.status);
@@ -122,6 +125,7 @@ export default function AdminProjectsPage() {
       tech_stack: techArray,
       github_url: githubUrl || null,
       live_url: liveUrl || null,
+      demo_video_url: demoVideoUrl || null,
       featured,
       display_order: Number(displayOrder),
       status,
@@ -414,7 +418,7 @@ export default function AdminProjectsPage() {
 
                 <div>
                   <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Live Demo URL
+                    Live Demo URL (Web App / API)
                   </label>
                   <input
                     type="url"
@@ -424,6 +428,22 @@ export default function AdminProjectsPage() {
                     placeholder="https://..."
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1">
+                  Demo Video / Walkthrough URL (YouTube, Loom, Vimeo, or MP4)
+                </label>
+                <input
+                  type="url"
+                  value={demoVideoUrl}
+                  onChange={(e) => setDemoVideoUrl(e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  placeholder="https://youtube.com/watch?v=... or https://loom.com/share/..."
+                />
+                <p className="text-[10px] text-slate-400 mt-1">
+                  Supports YouTube links, Loom share links, or direct MP4/WebM video files.
+                </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
