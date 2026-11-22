@@ -19,5 +19,5 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: ALLOWED_ORIGINS
-        value: "http://localhost:3000,https://*.vercel.app,https://*.onrender.com"
+        value: "http://localhost:3000,https://*.vercel.app,https://*.onrender.com,https://demilew-terefe.vercel.app,https://www.demilew.com,https://demilew.com"
 

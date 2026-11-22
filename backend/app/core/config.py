@@ -30,6 +30,7 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = (
         "http://localhost:3000,http://127.0.0.1:3000,"
         "https://*.vercel.app,https://*.onrender.com,"
+        "https://demilew-terefe.vercel.app,https://demilew-portfolio.vercel.app,"
         "https://www.demilew.com,https://demilew.com"
     )
 

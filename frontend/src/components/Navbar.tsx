@@ -105,11 +105,10 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
-                className={`relative px-2.5 py-1 rounded-md text-xs font-mono tracking-tight transition-all duration-150 ${
-                  isActive
+                className={`relative px-2.5 py-1 rounded-md text-xs font-mono tracking-tight transition-all duration-150 ${isActive
                     ? 'text-[var(--accent-primary)] font-semibold bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 shadow-xs'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
-                }`}
+                  }`}
               >
                 {link.name}
               </a>
@@ -122,22 +121,20 @@ export default function Navbar() {
           <div className="flex items-center border border-[var(--border-subtle)] rounded-lg p-0.5 bg-[var(--bg-surface)] text-xs font-mono">
             <button
               onClick={() => setLanguage('en')}
-              className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all ${
-                language === 'en'
+              className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all ${language === 'en'
                   ? 'bg-[var(--accent-primary)] text-white shadow-sm'
                   : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              }`}
+                }`}
               title="English"
             >
               EN
             </button>
             <button
               onClick={() => setLanguage('am')}
-              className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all ${
-                language === 'am'
+              className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-all ${language === 'am'
                   ? 'bg-[var(--accent-primary)] text-white shadow-sm'
                   : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              }`}
+                }`}
               title="አማርኛ (Amharic)"
             >
               አማ
@@ -238,11 +235,10 @@ export default function Navbar() {
                 key={link.id}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between text-sm font-mono min-h-[44px] py-2.5 px-3 rounded-lg border transition-all active:scale-[0.98] ${
-                  isActive
+                className={`flex items-center justify-between text-sm font-mono min-h-[44px] py-2.5 px-3 rounded-lg border transition-all active:scale-[0.98] ${isActive
                     ? 'text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 border-[var(--accent-primary)]/30 font-bold'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] border-[var(--border-subtle)] hover:border-[var(--border-prominent)]'
-                }`}
+                  }`}
               >
                 <span>{link.name}</span>
                 {isActive ? (
