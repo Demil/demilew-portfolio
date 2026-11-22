@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowUpRight, Lock, Sun, Moon, FileText } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sun, Moon, FileText } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -176,16 +176,6 @@ export default function Navbar() {
             <span>{t.nav.letsTalk}</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
           </a>
-
-          {/* Admin Portal Shortcut */}
-          <Link
-            href="/admin"
-            className="p-1.5 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
-            title={t.nav.adminPortal}
-            aria-label={t.nav.adminPortal}
-          >
-            <Lock className="w-3.5 h-3.5" />
-          </Link>
         </nav>
 
         {/* Mobile Action Controls & Hamburger */}
@@ -282,25 +272,15 @@ export default function Navbar() {
           </div>
 
           {/* Quick Action Footer in Drawer */}
-          <div className="flex items-center justify-between pt-3 border-t border-[var(--border-subtle)] mt-2">
+          <div className="pt-3 border-t border-[var(--border-subtle)] mt-2">
             <a
               href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex-1 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold min-h-[42px] px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[#090b10] active:scale-95 transition-transform shadow-sm"
+              className="w-full inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold min-h-[42px] px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[#090b10] active:scale-95 transition-transform shadow-sm text-center"
             >
               <span>{t.nav.letsTalk}</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
-
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xs font-mono text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] flex items-center gap-1.5 min-h-[42px] px-3 py-2 ml-2 rounded-lg border border-[var(--border-subtle)]"
-              aria-label="Admin Portal"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>Admin</span>
-            </Link>
           </div>
         </div>
       )}
